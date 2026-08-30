@@ -1,0 +1,4 @@
+Contact: mailto:security@starq.mv
+Preferred-Languages: en
+Policy: https://github.com/almstq/starqERP-public/blob/main/SECURITY.md
+Expires: 2027-08-31T00:00:00.000Z
