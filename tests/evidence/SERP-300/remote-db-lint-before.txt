@@ -1,0 +1,109 @@
+Initialising login role...
+Connecting to remote database...
+Linting schema: app_private
+Linting schema: extensions
+Linting schema: platform
+Linting schema: public
+[
+  {
+    "function": "app_private.seed_default_organisation_roles",
+    "issues": [
+      {
+        "level": "warning extra",
+        "message": "never read variable \"r_fc\"",
+        "sqlState": "00000"
+      },
+      {
+        "level": "warning extra",
+        "message": "never read variable \"r_counter\"",
+        "sqlState": "00000"
+      },
+      {
+        "level": "warning extra",
+        "message": "never read variable \"r_tech\"",
+        "sqlState": "00000"
+      },
+      {
+        "level": "warning extra",
+        "message": "never read variable \"r_qc\"",
+        "sqlState": "00000"
+      },
+      {
+        "level": "warning extra",
+        "message": "never read variable \"r_qm\"",
+        "sqlState": "00000"
+      },
+      {
+        "level": "warning extra",
+        "message": "never read variable \"r_recv\"",
+        "sqlState": "00000"
+      },
+      {
+        "level": "warning extra",
+        "message": "never read variable \"r_payer\"",
+        "sqlState": "00000"
+      },
+      {
+        "level": "warning extra",
+        "message": "never read variable \"r_auditor\"",
+        "sqlState": "00000"
+      }
+    ]
+  },
+  {
+    "function": "platform.provision_approved_application",
+    "issues": [
+      {
+        "level": "error",
+        "message": "column \"name\" of relation \"organisations\" does not exist",
+        "statement": {
+          "lineNumber": "41",
+          "text": "SQL statement"
+        },
+        "query": {
+          "position": "40",
+          "text": "insert into public.organisations (\n    name,\n    legal_name,\n    slug,\n    registry_code,\n    status\n  ) values (\n    v_app.name,\n    v_app.legal_name,\n    v_slug,\n    v_registry_code,\n    'active'\n  ) returning id"
+        },
+        "sqlState": "42703"
+      }
+    ]
+  },
+  {
+    "function": "public.api_garage_command",
+    "issues": [
+      {
+        "level": "error",
+        "message": "column \"metadata\" of relation \"contacts\" does not exist",
+        "statement": {
+          "lineNumber": "235",
+          "text": "SQL statement"
+        },
+        "query": {
+          "position": "92",
+          "text": "insert into public.contacts\r\n      (id, organisation_id, kind, display_name, phone, email, metadata)\r\n    values\r\n      (v_contact_id, target_org, 'customer', c_name, c_phone,\r\n       nullif(command-\u003e\u003e'email', ''),\r\n       jsonb_build_object('island', command-\u003e\u003e'island', 'notes', command-\u003e\u003e'notes',\r\n                          'type', command-\u003e\u003e'type', 'vehicles', command-\u003e'vehicles'))"
+        },
+        "sqlState": "42703"
+      }
+    ]
+  },
+  {
+    "function": "public.accept_staff_invitation",
+    "issues": [
+      {
+        "level": "error",
+        "message": "column \"role\" of relation \"memberships\" does not exist",
+        "statement": {
+          "lineNumber": "21",
+          "text": "SQL statement"
+        },
+        "query": {
+          "position": "86",
+          "text": "INSERT INTO public.memberships (\n        organisation_id,\n        person_id,\n        role,\n        status,\n        created_at,\n        updated_at\n    ) VALUES (\n        v_inv.organisation_id,\n        p_person_id,\n        v_inv.role_id,\n        'active',\n        now(),\n        now()\n    )\n    ON CONFLICT (organisation_id, person_id) DO UPDATE\n    SET role = EXCLUDED.role,\n        status = 'active',\n        updated_at = now()\n    RETURNING id"
+        },
+        "sqlState": "42703"
+      }
+    ]
+  }
+]
+A new version of Supabase CLI is available: v2.116.0 (currently installed v2.105.0)
+We recommend updating regularly for new features and bug fixes: https://supabase.com/docs/guides/cli/getting-started#updating-the-supabase-cli

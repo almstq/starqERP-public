@@ -1,0 +1,451 @@
+waiting for server to start.... done
+server started
+DO
+CREATE SCHEMA
+CREATE SCHEMA
+CREATE EXTENSION
+=== APPLY 202608200001_core_foundation.sql ===
+BEGIN
+CREATE EXTENSION
+psql:D:/StarqTech/worktrees/serp-037-codex/supabase/migrations/202608200001_core_foundation.sql:3: NOTICE:  extension "pgcrypto" already exists, skipping
+CREATE SCHEMA
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE TRIGGER
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+CREATE POLICY
+CREATE POLICY
+CREATE POLICY
+CREATE POLICY
+CREATE POLICY
+CREATE POLICY
+REVOKE
+COMMIT
+=== APPLY 202608200002_garage_inventory.sql ===
+BEGIN
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TRIGGER
+CREATE TRIGGER
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+CREATE POLICY
+CREATE POLICY
+CREATE POLICY
+CREATE POLICY
+CREATE POLICY
+CREATE POLICY
+CREATE POLICY
+CREATE POLICY
+CREATE POLICY
+REVOKE
+COMMIT
+=== APPLY 202608200003_commercial_accounting.sql ===
+BEGIN
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+ALTER TABLE
+CREATE TABLE
+CREATE FUNCTION
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE TRIGGER
+CREATE TRIGGER
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+CREATE POLICY
+CREATE POLICY
+CREATE POLICY
+CREATE POLICY
+CREATE POLICY
+CREATE POLICY
+CREATE POLICY
+REVOKE
+COMMIT
+=== APPLY 202608200004_pilot_security.sql ===
+BEGIN
+INSERT 0 2
+INSERT 0 3
+INSERT 0 8
+CREATE TABLE
+INSERT 0 1
+CREATE FUNCTION
+CREATE TABLE
+CREATE TRIGGER
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+CREATE POLICY
+CREATE POLICY
+CREATE POLICY
+CREATE POLICY
+REVOKE
+REVOKE
+GRANT
+COMMIT
+=== APPLY 202608200005_garage_api.sql ===
+BEGIN
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+REVOKE
+REVOKE
+REVOKE
+GRANT
+GRANT
+GRANT
+COMMIT
+=== APPLY 202608200006_garage_api_search_path.sql ===
+BEGIN
+ALTER FUNCTION
+COMMIT
+=== APPLY 202608200007_garage_api_self_test.sql ===
+BEGIN
+DO
+COMMIT
+=== APPLY 202608200008_session_authority.sql ===
+BEGIN
+CREATE FUNCTION
+REVOKE
+GRANT
+DO
+COMMIT
+=== APPLY 202608210009_seat_vocabulary.sql ===
+BEGIN
+INSERT 0 4
+DO
+COMMIT
+=== APPLY 202608210010_purchase_seat_matrix.sql ===
+BEGIN
+DO
+CREATE FUNCTION
+COMMENT
+COMMIT
+=== APPLY 202608220011_wire_purchase_seat_matrix.sql ===
+BEGIN
+DO
+CREATE FUNCTION
+ALTER FUNCTION
+psql:D:/StarqTech/worktrees/serp-037-codex/supabase/migrations/202608220011_wire_purchase_seat_matrix.sql:381: NOTICE:  SELF-TEST PASSED: purchase seat matrix is wired into api_garage_command
+DO
+COMMIT
+=== APPLY 202608250012_settlement_allocations.sql ===
+BEGIN
+ALTER TABLE
+CREATE TABLE
+CREATE TRIGGER
+CREATE FUNCTION
+CREATE TRIGGER
+CREATE FUNCTION
+ALTER TABLE
+CREATE POLICY
+REVOKE
+REVOKE
+COMMIT
+=== APPLY 202608250013_workflow_stages.sql ===
+BEGIN
+CREATE TABLE
+CREATE TABLE
+CREATE FUNCTION
+DO
+DO
+ALTER TABLE
+ALTER TABLE
+CREATE POLICY
+CREATE POLICY
+REVOKE
+GRANT
+GRANT
+COMMIT
+=== APPLY 202608250014_idempotency_replay.sql ===
+BEGIN
+CREATE FUNCTION
+REVOKE
+CREATE FUNCTION
+ALTER FUNCTION
+REVOKE
+GRANT
+COMMIT
+=== APPLY 202608250015_roles_as_data.sql ===
+BEGIN
+ALTER TABLE
+CREATE TABLE
+CREATE TABLE
+ALTER TABLE
+psql:D:/StarqTech/worktrees/serp-037-codex/supabase/migrations/202608250015_roles_as_data.sql:53: NOTICE:  constraint "memberships_role_fk" of relation "memberships" does not exist, skipping
+ALTER TABLE
+CREATE FUNCTION
+ seed_default_organisation_roles 
+---------------------------------
+ 
+(1 row)
+
+ seed_default_organisation_roles 
+---------------------------------
+ 
+(1 row)
+
+ALTER TABLE
+ALTER TABLE
+CREATE POLICY
+CREATE POLICY
+REVOKE
+GRANT
+GRANT
+COMMIT
+=== APPLY 202608250016_sod_exceptions.sql ===
+BEGIN
+CREATE TABLE
+CREATE TABLE
+CREATE FUNCTION
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+ALTER TABLE
+ALTER TABLE
+CREATE POLICY
+CREATE POLICY
+REVOKE
+GRANT
+GRANT
+COMMIT
+=== APPLY 202608250017_tax_regimes_and_periods.sql ===
+BEGIN
+CREATE TABLE
+CREATE TABLE
+INSERT 0 5
+INSERT 0 2
+INSERT 0 2
+CREATE FUNCTION
+ALTER TABLE
+ALTER TABLE
+CREATE POLICY
+CREATE POLICY
+REVOKE
+GRANT
+GRANT
+COMMIT
+=== APPLY 202608250018_bank_accounts_entities.sql ===
+BEGIN
+CREATE TABLE
+INSERT 0 3
+INSERT 0 2
+ALTER TABLE
+CREATE POLICY
+REVOKE
+GRANT
+GRANT
+COMMIT
+=== APPLY 202608250019_job_customer_vehicle_phone.sql ===
+BEGIN
+ALTER TABLE
+UPDATE 0
+CREATE FUNCTION
+ALTER FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+ALTER FUNCTION
+REVOKE
+GRANT
+COMMIT
+=== APPLY 202608250020_revision_missing_endpoints.sql ===
+BEGIN
+CREATE FUNCTION
+ALTER FUNCTION
+REVOKE
+GRANT
+COMMIT
+=== APPLY 202608260021_synthetic_tenant_uuid_transition.sql ===
+BEGIN
+DO
+COMMIT
+=== APPLY 202608260022_transactional_outbox_and_audit.sql ===
+BEGIN
+CREATE TABLE
+ALTER TABLE
+ALTER TABLE
+CREATE POLICY
+CREATE FUNCTION
+CREATE TRIGGER
+CREATE FUNCTION
+COMMIT
+=== APPLY 202608270023_round1_foundation_remediation.sql ===
+BEGIN
+ALTER TABLE
+UPDATE 0
+CREATE FUNCTION
+ALTER FUNCTION
+REVOKE
+GRANT
+COMMIT
+=== APPLY 202608270024_platform_control_plane.sql ===
+BEGIN
+CREATE SCHEMA
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+REVOKE
+REVOKE
+GRANT
+GRANT
+COMMIT
+=== APPLY 202608270025_books_and_operating_activities.sql ===
+BEGIN
+ALTER TABLE
+ALTER TABLE
+CREATE TABLE
+CREATE INDEX
+CREATE TABLE
+CREATE TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+DO
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+CREATE POLICY
+CREATE POLICY
+CREATE POLICY
+COMMIT
+=== APPLY 202608270026_organisation_applications_and_provisioning.sql ===
+BEGIN
+CREATE TABLE
+REVOKE
+GRANT
+CREATE FUNCTION
+REVOKE
+GRANT
+COMMIT
+=== APPLY 202608270027_staff_invitations_and_lifecycle.sql ===
+BEGIN
+CREATE TABLE
+CREATE INDEX
+ALTER TABLE
+GRANT
+GRANT
+CREATE POLICY
+CREATE FUNCTION
+COMMIT
+=== APPLY 202608280029_backup_catalogue_and_restore_contract.sql ===
+BEGIN
+CREATE TABLE
+CREATE TABLE
+CREATE TRIGGER
+CREATE TRIGGER
+REVOKE
+GRANT
+CREATE FUNCTION
+REVOKE
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+REVOKE
+GRANT
+COMMIT
+INSERT 0 2
+INSERT 0 2
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+SOURCE MANIFEST: {"persons": 2, "memberships": 1, "audit_events": 1, "organisations": 4, "fixture_digest": "03ac4b5bed44100f5df79014323d5824d397300eb825231c7582cda39601f002", "public_base_tables": 45, "platform_base_tables": 7}
+NEGATIVE: encrypted artifact rejected by pg_restore as expected
+SCRATCH MANIFEST: {"persons": 2, "memberships": 1, "audit_events": 1, "organisations": 4, "fixture_digest": "03ac4b5bed44100f5df79014323d5824d397300eb825231c7582cda39601f002", "public_base_tables": 45, "platform_base_tables": 7}
+                                                                                                                                                        actual_recovery_evidence                                                                                                                                                         
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ {"backup": {"ok": true, "replayed": false, "backup_id": "daa9ded9-1dad-4a23-ae14-98117e64777d", "ciphertext_sha256": "3daba7bdaca60610354c5780f7352ba2d689e51eec4336aa07ec88d6186f584f"}, "restore": {"ok": true, "error": null, "status": "verified", "replayed": false, "restore_report_id": "cde7e1f2-6e8a-4e7d-a78e-cc8eaef90c29"}}
+(1 row)
+
+BEGIN
+CREATE TABLE
+INSERT 0 2
+DO
+                probe                 |                        expected                         |                                                                                    actual                                                                                     | passed 
+--------------------------------------+---------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------
+ authenticated_catalogue_denied       | no schema/table/function access                         | schema=f table=f register=f restore=f                                                                                                                                         | t
+ service_role_function_only           | function execute allowed; direct table insert denied    | table_insert=f register=t restore=t                                                                                                                                           | t
+ encrypted_backup_registered          | one encrypted catalogue row plus audit                  | {"ok": true, "replayed": false, "backup_id": "4202d8de-dc59-4137-8783-c712b7441a44", "ciphertext_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"} | t
+ identical_replay                     | same durable winner; no duplicate audit                 | {"ok": true, "replayed": true, "backup_id": "4202d8de-dc59-4137-8783-c712b7441a44", "ciphertext_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"}  | t
+ conflicting_replay_denied            | idempotency_key_conflict                                | true                                                                                                                                                                          | t
+ cross_tenant_non_admin_denied        | backup_admin_required and zero Tenant B rows            | true                                                                                                                                                                          | t
+ plaintext_manifest_denied            | aes_256_gcm_required and no mutation                    | true                                                                                                                                                                          | t
+ scratch_restore_verified             | verified and attributable                               | {"ok": true, "error": null, "status": "verified", "replayed": false, "restore_report_id": "da117706-8bfc-4839-83de-82e4bb468de5"}                                             | t
+ restore_replay                       | same durable restore report                             | {"ok": true, "error": null, "status": "verified", "replayed": true, "restore_report_id": "da117706-8bfc-4839-83de-82e4bb468de5"}                                              | t
+ reconciliation_mismatch_fails_closed | failed report and attributable audit                    | {"ok": false, "error": "restore_reconciliation_mismatch", "status": "failed", "replayed": false, "restore_report_id": "50cc7830-fb94-4131-b98f-e2f91182be08"}                 | t
+ production_restore_forbidden         | failed report target_environment_must_be_non_production | {"ok": false, "error": "target_environment_must_be_non_production", "status": "failed", "replayed": false, "restore_report_id": "6697f2f2-5e31-4515-840b-02c14c5f4d92"}       | t
+ catalogue_immutable                  | update rejected as append-only                          | true                                                                                                                                                                          | t
+(12 rows)
+
+DO
+ROLLBACK
+PLAINTEXT SHA256: 1985ab4a2aefb21a4db8ed6c6431d1070233ae3b0fac3e4975c9f473bd541f5f
+CIPHERTEXT SHA256: 3daba7bdaca60610354c5780f7352ba2d689e51eec4336aa07ec88d6186f584f
+ENCRYPTED ARTIFACT: D:\StarqTech\_tmp\serp037\serp037-source.dump.aesgcm
+SERP-037 encrypted backup and scratch-restore probe: PASS

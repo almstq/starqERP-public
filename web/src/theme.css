@@ -1,0 +1,254 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   starqERP — Canonical Material 3 Design Tokens (M3 Quantum Expressive)
+   ─────────────────────────────────────────────────────────────────────────────
+   Aesthetic: Quantum Cosmic Midnight + Hyper Cyan & Royal Cobalt Accents
+   Contrast Level: Standard WCAG 2.1 AA Compliant
+   ───────────────────────────────────────────────────────────────────────────── */
+
+@theme {
+  --font-display: "Plus Jakarta Sans", "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans", "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Material 3 Shape Scale */
+  --md-sys-shape-none: 0px;
+  --md-sys-shape-corner-extra-small: 4px;
+  --md-sys-shape-corner-small: 8px;
+  --md-sys-shape-corner-medium: 12px;
+  --md-sys-shape-corner-large: 16px;
+  --md-sys-shape-corner-extra-large: 24px;
+  --md-sys-shape-corner-full: 9999px;
+
+  --radius-sm: var(--md-sys-shape-corner-extra-small);
+  --radius-md: var(--md-sys-shape-corner-small);
+  --radius-lg: var(--md-sys-shape-corner-medium);
+  --radius-xl: var(--md-sys-shape-corner-large);
+  --radius-2xl: var(--md-sys-shape-corner-extra-large);
+  --radius-full: var(--md-sys-shape-corner-full);
+
+  /* Material 3 Motion Curves */
+  --md-sys-motion-easing-emphasized: cubic-bezier(0.2, 0.0, 0, 1.0);
+  --md-sys-motion-easing-emphasized-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1.0);
+  --md-sys-motion-easing-emphasized-accelerate: cubic-bezier(0.3, 0.0, 0.8, 0.15);
+  --md-sys-motion-easing-standard: cubic-bezier(0.2, 0.0, 0, 1.0);
+  --md-sys-motion-easing-standard-decelerate: cubic-bezier(0, 0, 0.2, 1);
+  --md-sys-motion-easing-standard-accelerate: cubic-bezier(0.4, 0, 1, 1);
+
+  /* Material 3 Motion Durations */
+  --md-sys-motion-duration-short1: 50ms;
+  --md-sys-motion-duration-short2: 100ms;
+  --md-sys-motion-duration-short3: 150ms;
+  --md-sys-motion-duration-short4: 200ms;
+  --md-sys-motion-duration-medium1: 250ms;
+  --md-sys-motion-duration-medium2: 300ms;
+  --md-sys-motion-duration-medium3: 350ms;
+  --md-sys-motion-duration-medium4: 400ms;
+  --md-sys-motion-duration-long1: 450ms;
+  --md-sys-motion-duration-long2: 500ms;
+  --md-sys-motion-duration-long3: 550ms;
+  --md-sys-motion-duration-long4: 600ms;
+
+  /* Material 3 State Layer Opacities */
+  --md-sys-state-hover-opacity: 0.08;
+  --md-sys-state-focus-opacity: 0.12;
+  --md-sys-state-pressed-opacity: 0.12;
+  --md-sys-state-dragged-opacity: 0.16;
+
+  /* Material 3 Elevation Models with Subtle Luminescence */
+  --md-sys-elevation-0: none;
+  --md-sys-elevation-1: 0px 4px 12px rgba(0, 0, 0, 0.35), 0px 0px 1px rgba(255, 255, 255, 0.1);
+  --md-sys-elevation-2: 0px 8px 24px rgba(0, 0, 0, 0.45), 0px 0px 15px rgba(56, 189, 248, 0.08);
+  --md-sys-elevation-3: 0px 12px 36px rgba(0, 0, 0, 0.55), 0px 0px 25px rgba(56, 189, 248, 0.15);
+  --md-sys-elevation-4: 0px 16px 48px rgba(0, 0, 0, 0.65), 0px 0px 35px rgba(56, 189, 248, 0.2);
+  --md-sys-elevation-5: 0px 24px 64px rgba(0, 0, 0, 0.75), 0px 0px 45px rgba(56, 189, 248, 0.25);
+}
+
+/* ── LIGHT THEME (M3 Expressive Daylight) ────────────────────────────────── */
+:root,
+html.light,
+.light {
+  --md-sys-color-primary: #0284c7;
+  --md-sys-color-on-primary: #ffffff;
+  --md-sys-color-primary-container: #e0f2fe;
+  --md-sys-color-on-primary-container: #0369a1;
+
+  --md-sys-color-secondary: #475569;
+  --md-sys-color-on-secondary: #ffffff;
+  --md-sys-color-secondary-container: #f1f5f9;
+  --md-sys-color-on-secondary-container: #1e293b;
+
+  --md-sys-color-tertiary: #dc2626;
+  --md-sys-color-on-tertiary: #ffffff;
+  --md-sys-color-tertiary-container: #fee2e2;
+  --md-sys-color-on-tertiary-container: #991b1b;
+
+  --md-sys-color-error: #dc2626;
+  --md-sys-color-on-error: #ffffff;
+  --md-sys-color-error-container: #fee2e2;
+  --md-sys-color-on-error-container: #991b1b;
+
+  --md-sys-color-surface: #f8fafc;
+  --md-sys-color-surface-dim: #f1f5f9;
+  --md-sys-color-surface-bright: #ffffff;
+  --md-sys-color-surface-container-lowest: #ffffff;
+  --md-sys-color-surface-container-low: #f8fafc;
+  --md-sys-color-surface-container: #ffffff;
+  --md-sys-color-surface-container-high: #f1f5f9;
+  --md-sys-color-surface-container-highest: #e2e8f0;
+
+  --md-sys-color-on-surface: #0f172a;
+  --md-sys-color-on-surface-variant: #475569;
+  --md-sys-color-outline: #94a3b8;
+  --md-sys-color-outline-variant: #e2e8f0;
+
+  --md-sys-color-inverse-surface: #1e293b;
+  --md-sys-color-inverse-on-surface: #f8fafc;
+  --md-sys-color-inverse-primary: #38bdf8;
+  --md-sys-color-shadow: #000000;
+  --md-sys-color-scrim: #000000;
+
+  /* Semantic Bridge */
+  --canvas: var(--md-sys-color-surface);
+  --surface-1: var(--md-sys-color-surface-container-lowest);
+  --surface-2: var(--md-sys-color-surface-container-low);
+  --surface-3: var(--md-sys-color-surface-container);
+  --surface-inset: var(--md-sys-color-surface-container-high);
+
+  --border-subtle: var(--md-sys-color-outline-variant);
+  --border-strong: var(--md-sys-color-outline);
+  --border-focus: var(--md-sys-color-primary);
+
+  --text-primary: var(--md-sys-color-on-surface);
+  --text-secondary: var(--md-sys-color-on-surface-variant);
+  --text-muted: #64748b;
+  --text-inverse: var(--md-sys-color-on-primary);
+
+  --accent-primary: var(--md-sys-color-primary);
+  --accent-hover: #0369a1;
+  --accent-subtle: var(--md-sys-color-primary-container);
+
+  --positive: #16a34a;
+  --positive-subtle: #dcfce7;
+  --warning: #d97706;
+  --warning-subtle: #fef3c7;
+  --destructive: var(--md-sys-color-error);
+  --destructive-subtle: var(--md-sys-color-error-container);
+  --info: #0284c7;
+  --info-subtle: #e0f2fe;
+
+  --background: var(--canvas);
+  --foreground: var(--text-primary);
+  --card: var(--surface-1);
+  --card-foreground: var(--text-primary);
+  --border: var(--border-subtle);
+  --input: var(--border-strong);
+  --ring: var(--border-focus);
+}
+
+/* ── DARK THEME (Quantum Cosmic Midnight + Cyber Luminescent Accents) ────── */
+html.dark,
+.dark {
+  /* Quantum Cyan Accent System */
+  --md-sys-color-primary: #38bdf8;
+  --md-sys-color-on-primary: #001e2e;
+  --md-sys-color-primary-container: rgba(56, 189, 248, 0.15);
+  --md-sys-color-on-primary-container: #bae6fd;
+
+  --md-sys-color-secondary: #818cf8;
+  --md-sys-color-on-secondary: #1e1b4b;
+  --md-sys-color-secondary-container: rgba(129, 140, 248, 0.14);
+  --md-sys-color-on-secondary-container: #e0e7ff;
+
+  --md-sys-color-tertiary: #ef4444;
+  --md-sys-color-on-tertiary: #450a0a;
+  --md-sys-color-tertiary-container: rgba(239, 68, 68, 0.16);
+  --md-sys-color-on-tertiary-container: #fecaca;
+
+  --md-sys-color-error: #f87171;
+  --md-sys-color-on-error: #450a0a;
+  --md-sys-color-error-container: rgba(239, 68, 68, 0.16);
+  --md-sys-color-on-error-container: #fecaca;
+
+  /* Quantum Tonal Surface Containers */
+  --md-sys-color-surface: #020617;
+  --md-sys-color-surface-dim: #02050f;
+  --md-sys-color-surface-bright: #151f47;
+  --md-sys-color-surface-container-lowest: #050917;
+  --md-sys-color-surface-container-low: #060b1e;
+  --md-sys-color-surface-container: #0e1533;
+  --md-sys-color-surface-container-high: #141d3d;
+  --md-sys-color-surface-container-highest: #1c2752;
+
+  --md-sys-color-on-surface: #f8fafc;
+  --md-sys-color-on-surface-variant: #94a3b8;
+  --md-sys-color-outline: rgba(255, 255, 255, 0.16);
+  --md-sys-color-outline-variant: rgba(255, 255, 255, 0.08);
+
+  --md-sys-color-inverse-surface: #f8fafc;
+  --md-sys-color-inverse-on-surface: #020617;
+  --md-sys-color-inverse-primary: #0284c7;
+  --md-sys-color-shadow: #000000;
+  --md-sys-color-scrim: #000000;
+
+  /* Semantic Compatibility & Bridge Aliases */
+  --canvas: var(--md-sys-color-surface);
+  --surface-1: var(--md-sys-color-surface-container-lowest);
+  --surface-2: var(--md-sys-color-surface-container-low);
+  --surface-3: var(--md-sys-color-surface-container);
+  --surface-inset: var(--md-sys-color-surface-container-high);
+
+  --border-subtle: var(--md-sys-color-outline-variant);
+  --border-strong: var(--md-sys-color-outline);
+  --border-focus: var(--md-sys-color-primary);
+
+  --text-primary: var(--md-sys-color-on-surface);
+  --text-secondary: var(--md-sys-color-on-surface-variant);
+  --text-muted: #64748b;
+  --text-inverse: var(--md-sys-color-on-primary);
+
+  --accent-primary: var(--md-sys-color-primary);
+  --accent-hover: #00f0ff;
+  --accent-subtle: var(--md-sys-color-primary-container);
+
+  --positive: #34d399;
+  --positive-subtle: rgba(34, 197, 94, 0.15);
+  --warning: #fbbf24;
+  --warning-subtle: rgba(245, 158, 11, 0.15);
+  --destructive: var(--md-sys-color-error);
+  --destructive-subtle: var(--md-sys-color-error-container);
+  --info: #38bdf8;
+  --info-subtle: rgba(56, 189, 248, 0.15);
+
+  --background: var(--canvas);
+  --foreground: var(--text-primary);
+  --card: var(--surface-3);
+  --card-foreground: var(--text-primary);
+  --border: var(--border-subtle);
+  --input: var(--border-strong);
+  --ring: var(--border-focus);
+}
+
+/* ── M3 KEYFRAME ANIMATIONS ─────────────────────────────────────────────── */
+@keyframes md-ripple-expand {
+  0% { transform: scale(0); opacity: 0.35; }
+  100% { transform: scale(3.5); opacity: 0; }
+}
+
+@keyframes md-dialog-entrance {
+  0% { opacity: 0; transform: scale(0.94) translateY(8px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes md-drawer-slide-in {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(0); }
+}
+
+.m3-dialog-enter {
+  animation: md-dialog-entrance var(--md-sys-motion-duration-medium3) var(--md-sys-motion-easing-emphasized-decelerate) forwards;
+}
+
+.m3-drawer-enter {
+  animation: md-drawer-slide-in var(--md-sys-motion-duration-medium4) var(--md-sys-motion-easing-emphasized-decelerate) forwards;
+}

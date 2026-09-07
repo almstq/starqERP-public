@@ -1,0 +1,2096 @@
+{
+  "atolls": [
+    {
+      "code": "HA",
+      "nameEn": "Haa Alif",
+      "nameDv": "ހއ",
+      "administrativeName": "Thiladhunmathi Uthuruburi"
+    },
+    {
+      "code": "HDh",
+      "nameEn": "Haa Dhaalu",
+      "nameDv": "ހދ",
+      "administrativeName": "Thiladhunmathi Dhekunuburi"
+    },
+    {
+      "code": "Sh",
+      "nameEn": "Shaviyani",
+      "nameDv": "ށ",
+      "administrativeName": "Miladhunmadulu Uthuruburi"
+    },
+    {
+      "code": "N",
+      "nameEn": "Noonu",
+      "nameDv": "ނ",
+      "administrativeName": "Miladhunmadulu Dhekunuburi"
+    },
+    {
+      "code": "R",
+      "nameEn": "Raa",
+      "nameDv": "ރ",
+      "administrativeName": "Maalhosmadulu Uthuruburi"
+    },
+    {
+      "code": "B",
+      "nameEn": "Baa",
+      "nameDv": "ބ",
+      "administrativeName": "Maalhosmadulu Dhekunuburi"
+    },
+    {
+      "code": "Lh",
+      "nameEn": "Lhaviyani",
+      "nameDv": "ޅ",
+      "administrativeName": "Faadhippolhu"
+    },
+    {
+      "code": "K",
+      "nameEn": "Kaafu",
+      "nameDv": "ކ",
+      "administrativeName": "Malé Atoll"
+    },
+    {
+      "code": "AA",
+      "nameEn": "Alif Alif",
+      "nameDv": "އއ",
+      "administrativeName": "Ari Atoll Uthuruburi"
+    },
+    {
+      "code": "ADh",
+      "nameEn": "Alif Dhaal",
+      "nameDv": "އދ",
+      "administrativeName": "Ari Atoll Dhekunuburi"
+    },
+    {
+      "code": "V",
+      "nameEn": "Vaavu",
+      "nameDv": "ވ",
+      "administrativeName": "Felidhe Atoll"
+    },
+    {
+      "code": "M",
+      "nameEn": "Meemu",
+      "nameDv": "މ",
+      "administrativeName": "Mulaku Atoll"
+    },
+    {
+      "code": "F",
+      "nameEn": "Faafu",
+      "nameDv": "ފ",
+      "administrativeName": "Nilandhe Atoll Uthuruburi"
+    },
+    {
+      "code": "Dh",
+      "nameEn": "Dhaalu",
+      "nameDv": "ދ",
+      "administrativeName": "Nilandhe Atoll Dhekunuburi"
+    },
+    {
+      "code": "Th",
+      "nameEn": "Thaa",
+      "nameDv": "ތ",
+      "administrativeName": "Kolhumadulu"
+    },
+    {
+      "code": "L",
+      "nameEn": "Laamu",
+      "nameDv": "ލ",
+      "administrativeName": "Haddhunmathi"
+    },
+    {
+      "code": "GA",
+      "nameEn": "Gaafu Alif",
+      "nameDv": "ގއ",
+      "administrativeName": "Huvadhu Atoll Uthuruburi"
+    },
+    {
+      "code": "GDh",
+      "nameEn": "Gaafu Dhaalu",
+      "nameDv": "ގދ",
+      "administrativeName": "Huvadhu Atoll Dhekunuburi"
+    },
+    {
+      "code": "Gn",
+      "nameEn": "Gnaviyani",
+      "nameDv": "ޏ",
+      "administrativeName": "Fuvahmulah"
+    },
+    {
+      "code": "S",
+      "nameEn": "Seenu / Addu",
+      "nameDv": "ސ",
+      "administrativeName": "Addu Atoll"
+    }
+  ],
+  "islands": [
+    {
+      "id": "male",
+      "nameEn": "Malé",
+      "nameDv": "މާލެ",
+      "atollCode": "K",
+      "isCity": true,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 137433
+    },
+    {
+      "id": "hulhule",
+      "nameEn": "Hulhulé",
+      "nameDv": "ހުޅުލެ",
+      "atollCode": "K",
+      "isCity": false,
+      "airport": true,
+      "isIndustrial": false,
+      "population": 802
+    },
+    {
+      "id": "hulhumale",
+      "nameEn": "Hulhumalé",
+      "nameDv": "ހުޅުމާލެ",
+      "atollCode": "K",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 65724
+    },
+    {
+      "id": "vilimale",
+      "nameEn": "Villimalé",
+      "nameDv": "ވިލިމާލެ",
+      "atollCode": "K",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 6754
+    },
+    {
+      "id": "thilafushi",
+      "nameEn": "Thilafushi",
+      "nameDv": "ތިލަފުށި",
+      "atollCode": "K",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": true,
+      "population": 0
+    },
+    {
+      "id": "gulhifalhu",
+      "nameEn": "Gulhifalhu",
+      "nameDv": "ގުޅިފަޅު",
+      "atollCode": "K",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": true,
+      "population": 0
+    },
+    {
+      "id": "giraavarufalhu",
+      "nameEn": "Giraavarufalhu",
+      "nameDv": "ގިރާވަރުފަޅު",
+      "atollCode": "K",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": true,
+      "population": 0
+    },
+    {
+      "id": "dhiffushi-kaafu",
+      "nameEn": "Dhiffushi",
+      "nameDv": "ދިއްފުށި",
+      "atollCode": "K",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 1274
+    },
+    {
+      "id": "gaafaru",
+      "nameEn": "Gaafaru",
+      "nameDv": "ގާފަރު",
+      "atollCode": "K",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 1289
+    },
+    {
+      "id": "gulhi",
+      "nameEn": "Gulhi",
+      "nameDv": "ގުޅި",
+      "atollCode": "K",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 976
+    },
+    {
+      "id": "guraidhoo-kaafu",
+      "nameEn": "Guraidhoo",
+      "nameDv": "ގުރެދޫ",
+      "atollCode": "K",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 1739
+    },
+    {
+      "id": "himmafushi",
+      "nameEn": "Himmafushi",
+      "nameDv": "ހިއްމަފުށި",
+      "atollCode": "K",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 2015
+    },
+    {
+      "id": "huraa",
+      "nameEn": "Huraa",
+      "nameDv": "ހުރާ",
+      "atollCode": "K",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 1654
+    },
+    {
+      "id": "kaashidhoo",
+      "nameEn": "Kaashidhoo",
+      "nameDv": "ކާށިދޫ",
+      "atollCode": "K",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 2450
+    },
+    {
+      "id": "maafushi",
+      "nameEn": "Maafushi",
+      "nameDv": "މާފުށި",
+      "atollCode": "K",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 4499
+    },
+    {
+      "id": "thulusdhoo",
+      "nameEn": "Thulusdhoo",
+      "nameDv": "ތުލުސްދޫ",
+      "atollCode": "K",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 1818
+    },
+    {
+      "id": "baarah",
+      "nameEn": "Baarah",
+      "nameDv": "ބާރަށް",
+      "atollCode": "HA",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 1141
+    },
+    {
+      "id": "dhiddhoo-haa-alif",
+      "nameEn": "Dhiddhoo",
+      "nameDv": "ދިއްދޫ",
+      "atollCode": "HA",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 4736
+    },
+    {
+      "id": "filladhoo",
+      "nameEn": "Filladhoo",
+      "nameDv": "ފިއްލަދޫ",
+      "atollCode": "HA",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 559
+    },
+    {
+      "id": "hoarafushi",
+      "nameEn": "Hoarafushi",
+      "nameDv": "ހޯރަފުށި",
+      "atollCode": "HA",
+      "isCity": false,
+      "airport": true,
+      "isIndustrial": false,
+      "population": 1831
+    },
+    {
+      "id": "ihavandhoo",
+      "nameEn": "Ihavandhoo",
+      "nameDv": "އިހަވަންދޫ",
+      "atollCode": "HA",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 2866
+    },
+    {
+      "id": "kelaa",
+      "nameEn": "Kelaa",
+      "nameDv": "ކެލާ",
+      "atollCode": "HA",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 1117
+    },
+    {
+      "id": "maarandhoo-haa-alif",
+      "nameEn": "Maarandhoo",
+      "nameDv": "މާރަންދޫ",
+      "atollCode": "HA",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 667
+    },
+    {
+      "id": "mulhadhoo",
+      "nameEn": "Mulhadhoo",
+      "nameDv": "މުޅަދޫ",
+      "atollCode": "HA",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 286
+    },
+    {
+      "id": "muraidhoo",
+      "nameEn": "Muraidhoo",
+      "nameDv": "މުރެދޫ",
+      "atollCode": "HA",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 534
+    },
+    {
+      "id": "thakandhoo",
+      "nameEn": "Thakandhoo",
+      "nameDv": "ތަކަންދޫ",
+      "atollCode": "HA",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 279
+    },
+    {
+      "id": "thuraakunu",
+      "nameEn": "Thuraakunu",
+      "nameDv": "ތުރާކުނު",
+      "atollCode": "HA",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 427
+    },
+    {
+      "id": "uligamu",
+      "nameEn": "Uligamu",
+      "nameDv": "އުލިގަމު",
+      "atollCode": "HA",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 400
+    },
+    {
+      "id": "utheemu",
+      "nameEn": "Utheemu",
+      "nameDv": "އުތީމު",
+      "atollCode": "HA",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 612
+    },
+    {
+      "id": "vashafaru",
+      "nameEn": "Vashafaru",
+      "nameDv": "ވަށަފަރު",
+      "atollCode": "HA",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 476
+    },
+    {
+      "id": "hanimaadhoo",
+      "nameEn": "Hanimaadhoo",
+      "nameDv": "ހަނިމާދޫ",
+      "atollCode": "HDh",
+      "isCity": false,
+      "airport": true,
+      "isIndustrial": false,
+      "population": 2645
+    },
+    {
+      "id": "finey",
+      "nameEn": "Finey",
+      "nameDv": "ފިނޭ",
+      "atollCode": "HDh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 409
+    },
+    {
+      "id": "naivaadhoo",
+      "nameEn": "Naivaadhoo",
+      "nameDv": "ނައިވާދޫ",
+      "atollCode": "HDh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 495
+    },
+    {
+      "id": "nolhivaranfaru",
+      "nameEn": "Nolhivaranfaru",
+      "nameDv": "ނޮޅިވަރަންފަރު",
+      "atollCode": "HDh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 1255
+    },
+    {
+      "id": "nellaidhoo",
+      "nameEn": "Nellaidhoo",
+      "nameDv": "ނެއްލައިދޫ",
+      "atollCode": "HDh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 1036
+    },
+    {
+      "id": "nolhivaramu",
+      "nameEn": "Nolhivaramu",
+      "nameDv": "ނޮޅިވަރަމު",
+      "atollCode": "HDh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 1980
+    },
+    {
+      "id": "kurinbi",
+      "nameEn": "Kurinbi",
+      "nameDv": "ކުރިނބީ",
+      "atollCode": "HDh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 492
+    },
+    {
+      "id": "kulhudhuffushi",
+      "nameEn": "Kulhudhuffushi",
+      "nameDv": "ކުޅުދުއްފުށި",
+      "atollCode": "HDh",
+      "isCity": true,
+      "airport": true,
+      "isIndustrial": false,
+      "population": 10251
+    },
+    {
+      "id": "kumundhoo",
+      "nameEn": "Kumundhoo",
+      "nameDv": "ކުމުންދޫ",
+      "atollCode": "HDh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 996
+    },
+    {
+      "id": "neykurendhoo",
+      "nameEn": "Neykurendhoo",
+      "nameDv": "ނޭކުރެންދޫ",
+      "atollCode": "HDh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 641
+    },
+    {
+      "id": "vaikaradhoo",
+      "nameEn": "Vaikaradhoo",
+      "nameDv": "ވައިކަރަދޫ",
+      "atollCode": "HDh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 776
+    },
+    {
+      "id": "makunudhoo-haa-dhaalu",
+      "nameEn": "Makunudhoo",
+      "nameDv": "މަކުނުދޫ",
+      "atollCode": "HDh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 1265
+    },
+    {
+      "id": "hirimaradhoo",
+      "nameEn": "Hirimaradhoo",
+      "nameDv": "ހިރިމަރަދޫ",
+      "atollCode": "HDh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 293
+    },
+    {
+      "id": "bileffahi",
+      "nameEn": "Bileffahi",
+      "nameDv": "ބިލެއްފަހި",
+      "atollCode": "Sh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "feevah",
+      "nameEn": "Feevah",
+      "nameDv": "ފީވަށް",
+      "atollCode": "Sh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "feydhoo-shaviyani",
+      "nameEn": "Feydhoo",
+      "nameDv": "ފޭދޫ",
+      "atollCode": "Sh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "foakaidhoo",
+      "nameEn": "Foakaidhoo",
+      "nameDv": "ފޯކައިދޫ",
+      "atollCode": "Sh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "funadhoo-shaviyani",
+      "nameEn": "Funadhoo",
+      "nameDv": "ފުނަދޫ",
+      "atollCode": "Sh",
+      "isCity": false,
+      "airport": true,
+      "isIndustrial": true,
+      "population": 0
+    },
+    {
+      "id": "goidhoo-shaviyani",
+      "nameEn": "Goidhoo",
+      "nameDv": "ގޮއިދޫ",
+      "atollCode": "Sh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "kanditheemu",
+      "nameEn": "Kanditheemu",
+      "nameDv": "ކަންދިތީމު",
+      "atollCode": "Sh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "komandoo",
+      "nameEn": "Komandoo",
+      "nameDv": "ކޮމަންދޫ",
+      "atollCode": "Sh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "lhaimagu",
+      "nameEn": "Lhaimagu",
+      "nameDv": "ޅައިމަގު",
+      "atollCode": "Sh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "maaungoodhoo",
+      "nameEn": "Maaungoodhoo",
+      "nameDv": "މާއުނގޫދޫ",
+      "atollCode": "Sh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "maroshi",
+      "nameEn": "Maroshi",
+      "nameDv": "މަރޮށި",
+      "atollCode": "Sh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "milandhoo",
+      "nameEn": "Milandhoo",
+      "nameDv": "މިލަންދޫ",
+      "atollCode": "Sh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "narudhoo",
+      "nameEn": "Narudhoo",
+      "nameDv": "ނަރުދޫ",
+      "atollCode": "Sh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "noomaraa",
+      "nameEn": "Noomaraa",
+      "nameDv": "ނޫމަރާ",
+      "atollCode": "Sh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "foddhoo",
+      "nameEn": "Foddhoo",
+      "nameDv": "ފޮއްދޫ",
+      "atollCode": "N",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "henbadhoo",
+      "nameEn": "Henbadhoo",
+      "nameDv": "ހެންބަދޫ",
+      "atollCode": "N",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "holhudhoo",
+      "nameEn": "Holhudhoo",
+      "nameDv": "ހޮޅުދޫ",
+      "atollCode": "N",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "kendhikulhudhoo",
+      "nameEn": "Kendhikulhudhoo",
+      "nameDv": "ކެންދިކުޅުދޫ",
+      "atollCode": "N",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "kudafari",
+      "nameEn": "Kudafari",
+      "nameDv": "ކުޑަފަރި",
+      "atollCode": "N",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "landhoo",
+      "nameEn": "Landhoo",
+      "nameDv": "ލަންދޫ",
+      "atollCode": "N",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "lhohi",
+      "nameEn": "Lhohi",
+      "nameDv": "ޅޮހި",
+      "atollCode": "N",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "maafaru",
+      "nameEn": "Maafaru",
+      "nameDv": "މާފަރު",
+      "atollCode": "N",
+      "isCity": false,
+      "airport": true,
+      "isIndustrial": true,
+      "population": 0
+    },
+    {
+      "id": "maalhendhoo",
+      "nameEn": "Maalhendhoo",
+      "nameDv": "މާޅެންދޫ",
+      "atollCode": "N",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "magoodhoo-noonu",
+      "nameEn": "Magoodhoo",
+      "nameDv": "މަގޫދޫ",
+      "atollCode": "N",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "manadhoo",
+      "nameEn": "Manadhoo",
+      "nameDv": "މަނަދޫ",
+      "atollCode": "N",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "miladhoo",
+      "nameEn": "Miladhoo",
+      "nameDv": "މިލަދޫ",
+      "atollCode": "N",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "velidhoo",
+      "nameEn": "Velidhoo",
+      "nameDv": "ވެލިދޫ",
+      "atollCode": "N",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "alifushi",
+      "nameEn": "Alifushi",
+      "nameDv": "އަލިފުށި",
+      "atollCode": "R",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "angolhitheemu",
+      "nameEn": "Angolhitheemu",
+      "nameDv": "އަނގޮޅިތީމު",
+      "atollCode": "R",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "fainu",
+      "nameEn": "Fainu",
+      "nameDv": "ފައިނު",
+      "atollCode": "R",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "hulhudhuffaaru",
+      "nameEn": "Hulhudhuffaaru",
+      "nameDv": "ހުޅުދުއްފާރު",
+      "atollCode": "R",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "inguraidhoo",
+      "nameEn": "Inguraidhoo",
+      "nameDv": "އިނގުރެދޫ",
+      "atollCode": "R",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "innamaadhoo",
+      "nameEn": "Innamaadhoo",
+      "nameDv": "އިންނަމާދޫ",
+      "atollCode": "R",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "dhuvaafaru",
+      "nameEn": "Dhuvaafaru",
+      "nameDv": "ދުވާފަރު",
+      "atollCode": "R",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": true,
+      "population": 0
+    },
+    {
+      "id": "kinolhas",
+      "nameEn": "Kinolhas",
+      "nameDv": "ކިނޮޅަސް",
+      "atollCode": "R",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "maakurathu",
+      "nameEn": "Maakurathu",
+      "nameDv": "މާކުރަތު",
+      "atollCode": "R",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "maduvvaree-raa",
+      "nameEn": "Maduvvaree",
+      "nameDv": "މަޑުއްވަރީ",
+      "atollCode": "R",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "meedhoo-raa",
+      "nameEn": "Meedhoo",
+      "nameDv": "މީދޫ",
+      "atollCode": "R",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "rasgetheemu",
+      "nameEn": "Rasgetheemu",
+      "nameDv": "ރަސްގެތީމު",
+      "atollCode": "R",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "rasmaadhoo",
+      "nameEn": "Rasmaadhoo",
+      "nameDv": "ރަސްމާދޫ",
+      "atollCode": "R",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "ungoofaaru",
+      "nameEn": "Ungoofaaru",
+      "nameDv": "އުނގޫފާރު",
+      "atollCode": "R",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "vaadhoo-raa",
+      "nameEn": "Vaadhoo",
+      "nameDv": "ވާދޫ",
+      "atollCode": "R",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "dharavandhoo",
+      "nameEn": "Dharavandhoo",
+      "nameDv": "ދަރަވަންދޫ",
+      "atollCode": "B",
+      "isCity": false,
+      "airport": true,
+      "isIndustrial": true,
+      "population": 0
+    },
+    {
+      "id": "dhonfanu",
+      "nameEn": "Dhonfanu",
+      "nameDv": "ދޮންފަނު",
+      "atollCode": "B",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "eydhafushi",
+      "nameEn": "Eydhafushi",
+      "nameDv": "އޭދަފުށި",
+      "atollCode": "B",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "fehendhoo",
+      "nameEn": "Fehendhoo",
+      "nameDv": "ފެހެންދޫ",
+      "atollCode": "B",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "fulhadhoo-baa",
+      "nameEn": "Fulhadhoo",
+      "nameDv": "ފުޅަދޫ",
+      "atollCode": "B",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "goidhoo-baa",
+      "nameEn": "Goidhoo",
+      "nameDv": "ގޮއިދޫ",
+      "atollCode": "B",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "hithaadhoo-baa",
+      "nameEn": "Hithaadhoo",
+      "nameDv": "ހިތާދޫ",
+      "atollCode": "B",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "kamadhoo",
+      "nameEn": "Kamadhoo",
+      "nameDv": "ކަމަދޫ",
+      "atollCode": "B",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "kendhoo",
+      "nameEn": "Kendhoo",
+      "nameDv": "ކެންދޫ",
+      "atollCode": "B",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "kihaadhoo",
+      "nameEn": "Kihaadhoo",
+      "nameDv": "ކިހާދޫ",
+      "atollCode": "B",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "kudarikilu",
+      "nameEn": "Kudarikilu",
+      "nameDv": "ކުޑަރިކިލި",
+      "atollCode": "B",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "maalhos-baa",
+      "nameEn": "Maalhos",
+      "nameDv": "މާޅޮސް",
+      "atollCode": "B",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "thulhaadhoo",
+      "nameEn": "Thulhaadhoo",
+      "nameDv": "ތުޅާދޫ",
+      "atollCode": "B",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "hinnavaru",
+      "nameEn": "Hinnavaru",
+      "nameDv": "ހިންނަވަރު",
+      "atollCode": "Lh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 2288
+    },
+    {
+      "id": "kurendhoo",
+      "nameEn": "Kurendhoo",
+      "nameDv": "ކުރެންދޫ",
+      "atollCode": "Lh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 1171
+    },
+    {
+      "id": "maafilaafushi",
+      "nameEn": "Maafilaafushi",
+      "nameDv": "މާފިލާފުށި",
+      "atollCode": "Lh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "naifaru",
+      "nameEn": "Naifaru",
+      "nameDv": "ނައިފަރު",
+      "atollCode": "Lh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 4814
+    },
+    {
+      "id": "olhuvelifushi",
+      "nameEn": "Olhuvelifushi",
+      "nameDv": "އޮޅުވެލިފުށި",
+      "atollCode": "Lh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 696
+    },
+    {
+      "id": "ookolhufinolhu",
+      "nameEn": "Ookolhufinolhu",
+      "nameDv": "އޫކޮޅުފިނޮޅު",
+      "atollCode": "Lh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": true,
+      "population": 0
+    },
+    {
+      "id": "bodufolhudhoo",
+      "nameEn": "Bodufolhudhoo",
+      "nameDv": "ބޮޑުފޮޅުދޫ",
+      "atollCode": "AA",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 697
+    },
+    {
+      "id": "feridhoo-aa",
+      "nameEn": "Feridhoo",
+      "nameDv": "ފެރިދޫ",
+      "atollCode": "AA",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 543
+    },
+    {
+      "id": "himandhoo",
+      "nameEn": "Himandhoo",
+      "nameDv": "ހިމަންދޫ",
+      "atollCode": "AA",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 884
+    },
+    {
+      "id": "maalhos-aa",
+      "nameEn": "Maalhos",
+      "nameDv": "މާޅޮސް",
+      "atollCode": "AA",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 516
+    },
+    {
+      "id": "mathiveri",
+      "nameEn": "Mathiveri",
+      "nameDv": "މަތިވެރި",
+      "atollCode": "AA",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 874
+    },
+    {
+      "id": "rasdhoo",
+      "nameEn": "Rasdhoo",
+      "nameDv": "ރަސްދޫ",
+      "atollCode": "AA",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 1286
+    },
+    {
+      "id": "thoddoo",
+      "nameEn": "Thoddoo",
+      "nameDv": "ތޮއްދޫ",
+      "atollCode": "AA",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 1923
+    },
+    {
+      "id": "ukulhas",
+      "nameEn": "Ukulhas",
+      "nameDv": "އުކުޅަސް",
+      "atollCode": "AA",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 1274
+    },
+    {
+      "id": "fesdhoo",
+      "nameEn": "Fesdhoo",
+      "nameDv": "ފެސްދޫ",
+      "atollCode": "AA",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "dhangethi",
+      "nameEn": "Dhangethi",
+      "nameDv": "ދަނގެތި",
+      "atollCode": "ADh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "dhiddhoo-adh",
+      "nameEn": "Dhiddhoo",
+      "nameDv": "ދިއްދޫ",
+      "atollCode": "ADh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "dhigurah",
+      "nameEn": "Dhigurah",
+      "nameDv": "ދިގުރަށް",
+      "atollCode": "ADh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "fenfushi",
+      "nameEn": "Fenfushi",
+      "nameDv": "ފެންފުށި",
+      "atollCode": "ADh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "haggnaameedhoo",
+      "nameEn": "Haggnaameedhoo",
+      "nameDv": "ހައްގަނާމީދޫ",
+      "atollCode": "ADh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "kunburudhoo",
+      "nameEn": "Kunburudhoo",
+      "nameDv": "ކުންބުރުދޫ",
+      "atollCode": "ADh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "maamingili",
+      "nameEn": "Maamingili",
+      "nameDv": "މާމިންގިލި",
+      "atollCode": "ADh",
+      "isCity": false,
+      "airport": true,
+      "isIndustrial": true,
+      "population": 0
+    },
+    {
+      "id": "mahibadhoo",
+      "nameEn": "Mahibadhoo",
+      "nameDv": "މަހިބަދޫ",
+      "atollCode": "ADh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "mandhoo-adh",
+      "nameEn": "Mandhoo",
+      "nameDv": "މަންދޫ",
+      "atollCode": "ADh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "omadhoo-adh",
+      "nameEn": "Omadhoo",
+      "nameDv": "އޮމަދޫ",
+      "atollCode": "ADh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "felidhoo-vaavu",
+      "nameEn": "Felidhoo",
+      "nameDv": "ފެލިދޫ",
+      "atollCode": "V",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 618
+    },
+    {
+      "id": "fulidhoo",
+      "nameEn": "Fulidhoo",
+      "nameDv": "ފުލިދޫ",
+      "atollCode": "V",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 399
+    },
+    {
+      "id": "keyodhoo-vaavu",
+      "nameEn": "Keyodhoo",
+      "nameDv": "ކޭއޮދޫ",
+      "atollCode": "V",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 642
+    },
+    {
+      "id": "rakeedhoo",
+      "nameEn": "Rakeedhoo",
+      "nameDv": "ރަކީދޫ",
+      "atollCode": "V",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 77
+    },
+    {
+      "id": "thinadhoo-vaavu",
+      "nameEn": "Thinadhoo",
+      "nameDv": "ތިނަދޫ",
+      "atollCode": "V",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 259
+    },
+    {
+      "id": "dhiggaru",
+      "nameEn": "Dhiggaru",
+      "nameDv": "ދިއްގަރު",
+      "atollCode": "M",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 1096
+    },
+    {
+      "id": "kolhufushi",
+      "nameEn": "Kolhufushi",
+      "nameDv": "ކޮޅުފުށި",
+      "atollCode": "M",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 790
+    },
+    {
+      "id": "maduvvaree-meemu",
+      "nameEn": "Maduvvaree",
+      "nameDv": "މަޑުއްވަރީ",
+      "atollCode": "M",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 318
+    },
+    {
+      "id": "mulak",
+      "nameEn": "Mulak",
+      "nameDv": "މުލަކް",
+      "atollCode": "M",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 1423
+    },
+    {
+      "id": "muli",
+      "nameEn": "Muli",
+      "nameDv": "މުލި",
+      "atollCode": "M",
+      "isCity": false,
+      "airport": true,
+      "isIndustrial": false,
+      "population": 940
+    },
+    {
+      "id": "naalaafushi",
+      "nameEn": "Naalaafushi",
+      "nameDv": "ނާލާފުށި",
+      "atollCode": "M",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 430
+    },
+    {
+      "id": "raimmandhoo",
+      "nameEn": "Raimmandhoo",
+      "nameDv": "ރައިމްމަންދޫ",
+      "atollCode": "M",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 170
+    },
+    {
+      "id": "veyvah",
+      "nameEn": "Veyvah",
+      "nameDv": "ވޭވަށް",
+      "atollCode": "M",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 304
+    },
+    {
+      "id": "bileddhoo",
+      "nameEn": "Bileddhoo",
+      "nameDv": "ބިލެއްދޫ",
+      "atollCode": "F",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 964
+    },
+    {
+      "id": "dharanboodhoo",
+      "nameEn": "Dharanboodhoo",
+      "nameDv": "ދަރަންބޫދޫ",
+      "atollCode": "F",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 454
+    },
+    {
+      "id": "feeali",
+      "nameEn": "Feeali",
+      "nameDv": "ފީއަލި",
+      "atollCode": "F",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 922
+    },
+    {
+      "id": "magoodhoo-faafu",
+      "nameEn": "Magoodhoo",
+      "nameDv": "މަގޫދޫ",
+      "atollCode": "F",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 693
+    },
+    {
+      "id": "nilandhoo-faafu",
+      "nameEn": "Nilandhoo",
+      "nameDv": "ނިލަންދޫ",
+      "atollCode": "F",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 1825
+    },
+    {
+      "id": "bandidhoo",
+      "nameEn": "Bandidhoo",
+      "nameDv": "ބަންދިދޫ",
+      "atollCode": "Dh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 630
+    },
+    {
+      "id": "hulhudheli",
+      "nameEn": "Hulhudheli",
+      "nameDv": "ހުޅުދެލި",
+      "atollCode": "Dh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 761
+    },
+    {
+      "id": "kudahuvadhoo",
+      "nameEn": "Kudahuvadhoo",
+      "nameDv": "ކުޑަހުވަދޫ",
+      "atollCode": "Dh",
+      "isCity": false,
+      "airport": true,
+      "isIndustrial": false,
+      "population": 3132
+    },
+    {
+      "id": "maaenboodhoo",
+      "nameEn": "Maaenboodhoo",
+      "nameDv": "މާއެންބޫދޫ",
+      "atollCode": "Dh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 675
+    },
+    {
+      "id": "meedhoo-dh",
+      "nameEn": "Meedhoo",
+      "nameDv": "މީދޫ",
+      "atollCode": "Dh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 1113
+    },
+    {
+      "id": "rinbudhoo",
+      "nameEn": "Rinbudhoo",
+      "nameDv": "ރިންބުދޫ",
+      "atollCode": "Dh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 317
+    },
+    {
+      "id": "vaanee",
+      "nameEn": "Vaanee",
+      "nameDv": "ވާނީ",
+      "atollCode": "Dh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "burunee",
+      "nameEn": "Burunee",
+      "nameDv": "ބުރުނީ",
+      "atollCode": "Th",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "vilufushi",
+      "nameEn": "Vilufushi",
+      "nameDv": "ވިލުފުށި",
+      "atollCode": "Th",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "madifushi",
+      "nameEn": "Madifushi",
+      "nameDv": "މަޑިފުށި",
+      "atollCode": "Th",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "dhiyamingili",
+      "nameEn": "Dhiyamingili",
+      "nameDv": "ދިޔަމިންގިލި",
+      "atollCode": "Th",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "guraidhoo-th",
+      "nameEn": "Guraidhoo",
+      "nameDv": "ގުރެދޫ",
+      "atollCode": "Th",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "gaadhiffushi",
+      "nameEn": "Gaadhiffushi",
+      "nameDv": "ގާދިއްފުށި",
+      "atollCode": "Th",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "thimarafushi",
+      "nameEn": "Thimarafushi",
+      "nameDv": "ތިމަރަފުށި",
+      "atollCode": "Th",
+      "isCity": false,
+      "airport": true,
+      "isIndustrial": true,
+      "population": 0
+    },
+    {
+      "id": "veymandoo",
+      "nameEn": "Veymandoo",
+      "nameDv": "ވޭމަންދޫ",
+      "atollCode": "Th",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "kinbidhoo",
+      "nameEn": "Kinbidhoo",
+      "nameDv": "ކިންބިދޫ",
+      "atollCode": "Th",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "omadhoo-th",
+      "nameEn": "Omadhoo",
+      "nameDv": "އޮމަދޫ",
+      "atollCode": "Th",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "hirilandhoo",
+      "nameEn": "Hirilandhoo",
+      "nameDv": "ހިރިލަންދޫ",
+      "atollCode": "Th",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "kandoodhoo",
+      "nameEn": "Kandoodhoo",
+      "nameDv": "ކަންދޫދޫ",
+      "atollCode": "Th",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "vandhoo-th",
+      "nameEn": "Vandhoo",
+      "nameDv": "ވަންދޫ",
+      "atollCode": "Th",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "dhanbidhoo",
+      "nameEn": "Dhanbidhoo",
+      "nameDv": "ދަންބިދޫ",
+      "atollCode": "L",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "fonadhoo",
+      "nameEn": "Fonadhoo",
+      "nameDv": "ފޮނަދޫ",
+      "atollCode": "L",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "gan-laamu",
+      "nameEn": "Gan",
+      "nameDv": "ގަން",
+      "atollCode": "L",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 4815
+    },
+    {
+      "id": "hithadhoo-laamu",
+      "nameEn": "Hithadhoo",
+      "nameDv": "ހިތަދޫ",
+      "atollCode": "L",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": true,
+      "population": 0
+    },
+    {
+      "id": "isdhoo-laamu",
+      "nameEn": "Isdhoo",
+      "nameDv": "އިސްދޫ",
+      "atollCode": "L",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "kunahandhoo",
+      "nameEn": "Kunahandhoo",
+      "nameDv": "ކުނަހަންދޫ",
+      "atollCode": "L",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "maabaidhoo",
+      "nameEn": "Maabaidhoo",
+      "nameDv": "މާބައިދޫ",
+      "atollCode": "L",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "maamendhoo-laamu",
+      "nameEn": "Maamendhoo",
+      "nameDv": "މާމެންދޫ",
+      "atollCode": "L",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "maavah",
+      "nameEn": "Maavah",
+      "nameDv": "މާވަށް",
+      "atollCode": "L",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "mundoo",
+      "nameEn": "Mundoo",
+      "nameDv": "މުންދޫ",
+      "atollCode": "L",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "dhaandhoo",
+      "nameEn": "Dhaandhoo",
+      "nameDv": "ދާންދޫ",
+      "atollCode": "GA",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 1045
+    },
+    {
+      "id": "dhevvadhoo",
+      "nameEn": "Dhevvadhoo",
+      "nameDv": "ދެއްވަދޫ",
+      "atollCode": "GA",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 598
+    },
+    {
+      "id": "gemanafushi",
+      "nameEn": "Gemanafushi",
+      "nameDv": "ގެމަނަފުށި",
+      "atollCode": "GA",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 1307
+    },
+    {
+      "id": "kanduhulhudhoo",
+      "nameEn": "Kanduhulhudhoo",
+      "nameDv": "ކަންދުހުޅުދޫ",
+      "atollCode": "GA",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 616
+    },
+    {
+      "id": "kolamaafushi",
+      "nameEn": "Kolamaafushi",
+      "nameDv": "ކޮމާފުށި",
+      "atollCode": "GA",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 635
+    },
+    {
+      "id": "kondey",
+      "nameEn": "Kondey",
+      "nameDv": "ކޮންދޭ",
+      "atollCode": "GA",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 328
+    },
+    {
+      "id": "maamendhoo-ga",
+      "nameEn": "Maamendhoo",
+      "nameDv": "މާމެންދޫ",
+      "atollCode": "GA",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 1197
+    },
+    {
+      "id": "nilandhoo-ga",
+      "nameEn": "Nilandhoo",
+      "nameDv": "ނިލަންދޫ",
+      "atollCode": "GA",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 542
+    },
+    {
+      "id": "villingili-ga",
+      "nameEn": "Villingili",
+      "nameDv": "ވިލިންގިލި",
+      "atollCode": "GA",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 2906
+    },
+    {
+      "id": "fares-maathodaa",
+      "nameEn": "Fares-Maathodaa",
+      "nameDv": "ފަރެސްމާތޮޑާ",
+      "atollCode": "GDh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": true,
+      "population": 0
+    },
+    {
+      "id": "fiyoaree",
+      "nameEn": "Fiyoaree",
+      "nameDv": "ފިޔޯރީ",
+      "atollCode": "GDh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "gadhdhoo",
+      "nameEn": "Gadhdhoo",
+      "nameDv": "ގައްދޫ",
+      "atollCode": "GDh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "hoandeddhoo",
+      "nameEn": "Hoandeddhoo",
+      "nameDv": "ހޯންޑެއްދޫ",
+      "atollCode": "GDh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "madaveli",
+      "nameEn": "Madaveli",
+      "nameDv": "މަޑަވެލި",
+      "atollCode": "GDh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "nadellaa",
+      "nameEn": "Nadellaa",
+      "nameDv": "ނަޑެއްލާ",
+      "atollCode": "GDh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "rathafandhoo",
+      "nameEn": "Rathafandhoo",
+      "nameDv": "ރަތަފަންދޫ",
+      "atollCode": "GDh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "thinadhoo-gdh",
+      "nameEn": "Thinadhoo",
+      "nameDv": "ތިނަދޫ",
+      "atollCode": "GDh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 0
+    },
+    {
+      "id": "vaadhoo-gdh",
+      "nameEn": "Vaadhoo",
+      "nameDv": "ވާދޫ",
+      "atollCode": "GDh",
+      "isCity": false,
+      "airport": false,
+      "isIndustrial": true,
+      "population": 0
+    },
+    {
+      "id": "fuvahmulah",
+      "nameEn": "Fuvahmulah",
+      "nameDv": "ފުވަމުލަށް",
+      "atollCode": "Gn",
+      "isCity": true,
+      "airport": true,
+      "isIndustrial": false,
+      "population": 14200
+    },
+    {
+      "id": "hithadhoo-addu",
+      "nameEn": "Hithadhoo",
+      "nameDv": "ހިތަދޫ",
+      "atollCode": "S",
+      "isCity": true,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 13745
+    },
+    {
+      "id": "maradhoo",
+      "nameEn": "Maradhoo",
+      "nameDv": "މަރަދޫ",
+      "atollCode": "S",
+      "isCity": true,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 2547
+    },
+    {
+      "id": "maradhoo-feydhoo",
+      "nameEn": "Maradhoo-Feydhoo",
+      "nameDv": "މަރަދޫ-ފޭދޫ",
+      "atollCode": "S",
+      "isCity": true,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 1396
+    },
+    {
+      "id": "feydhoo-addu",
+      "nameEn": "Feydhoo",
+      "nameDv": "ފޭދޫ",
+      "atollCode": "S",
+      "isCity": true,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 4291
+    },
+    {
+      "id": "hulhudhoo-addu",
+      "nameEn": "Hulhudhoo",
+      "nameDv": "ހުޅުދޫ",
+      "atollCode": "S",
+      "isCity": true,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 1182
+    },
+    {
+      "id": "meedhoo-addu",
+      "nameEn": "Meedhoo",
+      "nameDv": "މީދޫ",
+      "atollCode": "S",
+      "isCity": true,
+      "airport": false,
+      "isIndustrial": false,
+      "population": 1892
+    },
+    {
+      "id": "gan-addu",
+      "nameEn": "Gan",
+      "nameDv": "ގަން",
+      "atollCode": "S",
+      "isCity": false,
+      "airport": true,
+      "isIndustrial": true,
+      "population": 0
+    }
+  ]
+}

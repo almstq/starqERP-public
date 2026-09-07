@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>starqERP</title>
+    <meta
+      name="description"
+      content="starqERP — a Maldives-first operating system for small and medium businesses. Customers, work, inventory, procurement and money in one operational record."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <meta name="theme-color" content="#0F52BA" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+  </head>
+  <!--
+    NO STYLING CLASSES ON BODY.
+
+    This element previously carried `bg-slate-900 text-slate-100
+    font-['Plus_Jakarta_Sans']`, which silently outranked the design tokens: the
+    ground came from a hardcoded slate while the text colour came from the token
+    set, and when the token set resolved to its light values the result was
+    near-black text on a near-black page. The content was there the whole time
+    and none of it could be read.
+
+    The ground, the text colour and the typeface all come from src/theme.css.
+    Nothing here competes with them.
+  -->
+  <body class="antialiased">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

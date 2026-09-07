@@ -1,0 +1,66 @@
+BEGIN
+CREATE TABLE
+INSERT 0 2
+INSERT 0 2
+INSERT 0 2
+ seed_default_organisation_roles 
+---------------------------------
+ 
+(1 row)
+
+ seed_default_organisation_roles 
+---------------------------------
+ 
+(1 row)
+
+INSERT 0 1
+INSERT 0 1
+INSERT 0 3
+INSERT 0 1
+INSERT 0 2
+INSERT 0 3
+INSERT 0 1
+CREATE ROLE
+GRANT ROLE
+GRANT
+GRANT
+GRANT
+SET
+SET
+              set_config              
+--------------------------------------
+ 30000000-0000-4000-8000-000000000101
+(1 row)
+
+              set_config              
+--------------------------------------
+ 30000000-0000-4000-8000-000000000001
+(1 row)
+
+              set_config              
+--------------------------------------
+ 30000000-0000-4000-8000-000000000301
+(1 row)
+
+DO
+RESET
+           attack            |                  expected                   |                            actual                             | passed 
+-----------------------------+---------------------------------------------+---------------------------------------------------------------+--------
+ cross_tenant_select         | 0 tenant B rows                             | 0 tenant B rows                                               | t
+ cross_tenant_update         | 0 rows affected                             | 0 rows affected                                               | t
+ cross_tenant_delete         | 0 rows affected                             | 0 rows affected                                               | t
+ cross_tenant_insert         | RLS rejection                               | RLS rejection                                                 | t
+ unauthorised_book_select    | 0 Book A2 rows                              | 1 Book A2 rows                                                | f
+ unauthorised_book_update    | 0 rows affected                             | 1 rows affected                                               | f
+ unauthorised_book_delete    | 0 rows affected                             | 1 rows affected                                               | f
+ direct_invitation_rpc_grant | authenticated cannot EXECUTE                | authenticated can EXECUTE                                     | f
+ invitation_rpc_runtime      | service path executes canonical schema only | 42703: column "role" of relation "memberships" does not exist | f
+(9 rows)
+
+psql:tests/serp_300_adversarial_isolation_probe.sql:179: ERROR:  SERP-300 SECURITY FAILURES:
+direct_invitation_rpc_grant => authenticated can EXECUTE
+invitation_rpc_runtime => 42703: column "role" of relation "memberships" does not exist
+unauthorised_book_delete => 1 rows affected
+unauthorised_book_select => 1 Book A2 rows
+unauthorised_book_update => 1 rows affected
+CONTEXT:  PL/pgSQL function inline_code_block line 9 at RAISE

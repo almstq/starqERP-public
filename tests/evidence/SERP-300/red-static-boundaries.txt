@@ -1,0 +1,304 @@
+✖ SERP-300: invitation SECURITY DEFINER RPC is service-role only (1.1877ms)
+✖ SERP-300: invitation migration targets the canonical membership and audit schema (0.7142ms)
+✖ SERP-300: tenant invitation API is explicitly limited to administrative seats (0.2737ms)
+✖ SERP-300: tenant context switching validates both membership and book assignment (0.3029ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 0
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 92.8255
+
+✖ failing tests:
+
+test at ..\..\..\!starq\worktrees\serp-300-codex\tests\serp_300_security_boundaries.test.mjs:17:1
+✖ SERP-300: invitation SECURITY DEFINER RPC is service-role only (1.1877ms)
+  AssertionError [ERR_ASSERTION]: accept_staff_invitation must explicitly revoke PUBLIC, anon, and authenticated execution
+      at TestContext.<anonymous> (file:///D:/!starq/worktrees/serp-300-codex/tests/serp_300_security_boundaries.test.mjs:18:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.start (node:internal/test_runner/test:1096:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: "-- -----------------------------------------------------------------------------\r\n-- Migration 0027: Staff Invitations and Lifecycle Workflow (SERP-286)\r\n-- -----------------------------------------------------------------------------\r\n-- Enables self-service tenant staff invitations:\r\n-- 1. Table public.invitations with 7-day token expiration, role, books, locations.\r\n-- 2. Tenant isolation RLS policies on public.invitations.\r\n-- 3. Stored procedure public.accept_staff_invitation to atomically activate membership.\r\n-- -----------------------------------------------------------------------------\r\n\r\nbegin;\r\n\r\nCREATE TABLE IF NOT EXISTS public.invitations (\r\n    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\r\n    organisation_id UUID NOT NULL REFERENCES public.organisations(id) ON DELETE CASCADE,\r\n    email TEXT NOT NULL,\r\n    name TEXT NOT NULL,\r\n    role_id TEXT NOT NULL DEFAULT 'viewer',\r\n    job_title TEXT,\r\n    phone TEXT,\r\n    book_ids UUID[] DEFAULT '{}',\r\n    location_ids UUID[] DEFAULT '{}',\r\n    token TEXT NOT NULL UNIQUE DEFAULT replace(gen_random_uuid()::text, '-', '') || replace(gen_random_uuid()::text, '-', ''),\r\n    status TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'accepted', 'expired', 'revoked', 'cancelled')),\r\n    invited_by UUID REFERENCES public.persons(id) ON DELETE SET NULL,\r\n    expires_at TIMESTAMPTZ NOT NULL DEFAULT (now() + interval '7 days'),\r\n    accepted_at TIMESTAMPTZ,\r\n    accepted_by UUID REFERENCES public.persons(id) ON DELETE SET NULL,\r\n    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),\r\n    updated_at TIMESTAMPTZ NOT NULL DEFAULT now()\r\n);\r\n\r\n-- Partial index ensuring only one active pending invitation per email per organization\r\nCREATE UNIQUE INDEX IF NOT EXISTS uq_invitation_org_email_pending\r\n    ON public.invitations (organisation_id, lower(trim(email)))\r\n    WHERE status = 'pending';\r\n\r\n-- Enable RLS\r\nALTER TABLE public.invitations ENABLE ROW LEVEL SECURITY;\r\n\r\n-- Grant permissions\r\nGRANT SELECT, INSERT, UPDATE, DELETE ON public.invitations TO authenticated;\r\nGRANT ALL ON public.invitations TO service_role;\r\n\r\n-- RLS Policy: Tenant isolation using canonical app_private.current_organisation_id()\r\nCREATE POLICY invitations_tenant_isolation ON public.invitations\r\n    FOR ALL\r\n    USING (\r\n        organisation_id = app_private.current_organisation_id()\r\n    )\r\n    WITH CHECK (\r\n        organisation_id = app_private.current_organisation_id()\r\n    );\r\n\r\n-- Stored procedure to atomically accept an invitation on sign-in\r\nCREATE OR REPLACE FUNCTION public.accept_staff_invitation(\r\n    p_invitation_id UUID,\r\n    p_person_id UUID,\r\n    p_verified_email TEXT\r\n)\r\nRETURNS JSONB\r\nLANGUAGE plpgsql\r\nSECURITY DEFINER\r\nSET search_path = public, platform, auth, extensions\r\nAS $$\r\nDECLARE\r\n    v_inv RECORD;\r\n    v_membership_id UUID;\r\n    v_book_id UUID;\r\nBEGIN\r\n    -- 1. Lock and validate invitation\r\n    SELECT * INTO v_inv\r\n    FROM public.invitations\r\n    WHERE id = p_invitation_id\r\n      AND status = 'pending'\r\n      AND expires_at > now()\r\n      AND lower(trim(email)) = lower(trim(p_verified_email))\r\n    FOR UPDATE;\r\n\r\n    IF NOT FOUND THEN\r\n        RETURN jsonb_build_object('ok', false, 'error', 'invitation_invalid_or_expired');\r\n    END IF;\r\n\r\n    -- 2. Upsert membership in the organization\r\n    INSERT INTO public.memberships (\r\n        organisation_id,\r\n        person_id,\r\n        role,\r\n        status,\r\n        created_at,\r\n        updated_at\r\n    ) VALUES (\r\n        v_inv.organisation_id,\r\n        p_person_id,\r\n        v_inv.role_id,\r\n        'active',\r\n        now(),\r\n        now()\r\n    )\r\n    ON CONFLICT (organisation_id, person_id) DO UPDATE\r\n    SET role = EXCLUDED.role,\r\n        status = 'active',\r\n        updated_at = now()\r\n    RETURNING id INTO v_membership_id;\r\n\r\n    -- 3. Upsert membership seat\r\n    INSERT INTO public.membership_seats (\r\n        membership_id,\r\n        seat_code,\r\n        created_at\r\n    ) VALUES (\r\n        v_membership_id,\r\n        v_inv.role_id,\r\n        now()\r\n    )\r\n    ON CONFLICT (membership_id, seat_code) DO NOTHING;\r\n\r\n    -- 4. Attach book memberships if book_ids specified, otherwise attach default book\r\n    IF array_length(v_inv.book_ids, 1) > 0 THEN\r\n        FOREACH v_book_id IN ARRAY v_inv.book_ids LOOP\r\n            INSERT INTO public.book_memberships (\r\n                organisation_id,\r\n                membership_id,\r\n                book_id,\r\n                created_at\r\n            ) VALUES (\r\n                v_inv.organisation_id,\r\n                v_membership_id,\r\n                v_book_id,\r\n                now()\r\n            )\r\n            ON CONFLICT (organisation_id, membership_id, book_id) DO NOTHING;\r\n        END LOOP;\r\n    ELSE\r\n        -- Attach default book\r\n        SELECT id INTO v_book_id\r\n        FROM public.books\r\n        WHERE organisation_id = v_inv.organisation_id\r\n          AND is_default = true\r\n        LIMIT 1;\r\n\r\n        IF v_book_id IS NOT NULL THEN\r\n            INSERT INTO public.book_memberships (\r\n                organisation_id,\r\n                membership_id,\r\n                book_id,\r\n                created_at\r\n            ) VALUES (\r\n                v_inv.organisation_id,\r\n                v_membership_id,\r\n                v_book_id,\r\n                now()\r\n            )\r\n            ON CONFLICT (organisation_id, membership_id, book_id) DO NOTHING;\r\n        END IF;\r\n    END IF;\r\n\r\n    -- 5. Mark invitation as accepted\r\n    UPDATE public.invitations\r\n    SET status = 'accepted',\r\n        accepted_at = now(),\r\n        accepted_by = p_person_id,\r\n        updated_at = now()\r\n    WHERE id = v_inv.id;\r\n\r\n    -- 6. Record immutable audit event\r\n    INSERT INTO public.audit_events (\r\n        organisation_id,\r\n        person_id,\r\n        event_type,\r\n        details,\r\n        occurred_at\r\n    ) VALUES (\r\n        v_inv.organisation_id,\r\n        p_person_id,\r\n        'invitation.accepted',\r\n        jsonb_build_object(\r\n            'invitation_id', v_inv.id,\r\n            'email', v_inv.email,\r\n            'role', v_inv.role_id,\r\n            'membership_id', v_membership_id\r\n        ),\r\n        now()\r\n    );\r\n\r\n    RETURN jsonb_build_object(\r\n        'ok', true,\r\n        'organisation_id', v_inv.organisation_id,\r\n        'membership_id', v_membership_id,\r\n        'role', v_inv.role_id\r\n    );\r\nEND;\r\n$$;\r\n\r\ncommit;\r\n",
+    expected: /revoke\s+all\s+on\s+function\s+public\.accept_staff_invitation\s*\(\s*uuid\s*,\s*uuid\s*,\s*text\s*\)\s+from\s+public\s*,\s*anon\s*,\s*authenticated\s*;/i,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at ..\..\..\!starq\worktrees\serp-300-codex\tests\serp_300_security_boundaries.test.mjs:30:1
+✖ SERP-300: invitation migration targets the canonical membership and audit schema (0.7142ms)
+  AssertionError [ERR_ASSERTION]: The input was expected to not match the regular expression /\bmemberships\s*\([^)]*\brole\b/is. Input:
+  
+  '-- -----------------------------------------------------------------------------\r\n' +
+    '-- Migration 0027: Staff Invitations and Lifecycle Workflow (SERP-286)\r\n' +
+    '-- -----------------------------------------------------------------------------\r\n' +
+    '-- Enables self-service tenant staff invitations:\r\n' +
+    '-- 1. Table public.invitations with 7-day token expiration, role, books, locations.\r\n' +
+    '-- 2. Tenant isolation RLS policies on public.invitations.\r\n' +
+    '-- 3. Stored procedure public.accept_staff_invitation to atomically activate membership.\r\n' +
+    '-- -----------------------------------------------------------------------------\r\n' +
+    '\r\n' +
+    'begin;\r\n' +
+    '\r\n' +
+    'CREATE TABLE IF NOT EXISTS public.invitations (\r\n' +
+    '    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\r\n' +
+    '    organisation_id UUID NOT NULL REFERENCES public.organisations(id) ON DELETE CASCADE,\r\n' +
+    '    email TEXT NOT NULL,\r\n' +
+    '    name TEXT NOT NULL,\r\n' +
+    "    role_id TEXT NOT NULL DEFAULT 'viewer',\r\n" +
+    '    job_title TEXT,\r\n' +
+    '    phone TEXT,\r\n' +
+    "    book_ids UUID[] DEFAULT '{}',\r\n" +
+    "    location_ids UUID[] DEFAULT '{}',\r\n" +
+    "    token TEXT NOT NULL UNIQUE DEFAULT replace(gen_random_uuid()::text, '-', '') || replace(gen_random_uuid()::text, '-', ''),\r\n" +
+    "    status TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'accepted', 'expired', 'revoked', 'cancelled')),\r\n" +
+    '    invited_by UUID REFERENCES public.persons(id) ON DELETE SET NULL,\r\n' +
+    "    expires_at TIMESTAMPTZ NOT NULL DEFAULT (now() + interval '7 days'),\r\n" +
+    '    accepted_at TIMESTAMPTZ,\r\n' +
+    '    accepted_by UUID REFERENCES public.persons(id) ON DELETE SET NULL,\r\n' +
+    '    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),\r\n' +
+    '    updated_at TIMESTAMPTZ NOT NULL DEFAULT now()\r\n' +
+    ');\r\n' +
+    '\r\n' +
+    '-- Partial index ensuring only one active pending invitation per email per organization\r\n' +
+    'CREATE UNIQUE INDEX IF NOT EXISTS uq_invitation_org_email_pending\r\n' +
+    '    ON public.invitations (organisation_id, lower(trim(email)))\r\n' +
+    "    WHERE status = 'pending';\r\n" +
+    '\r\n' +
+    '-- Enable RLS\r\n' +
+    'ALTER TABLE public.invitations ENABLE ROW LEVEL SECURITY;\r\n' +
+    '\r\n' +
+    '-- Grant permissions\r\n' +
+    'GRANT SELECT, INSERT, UPDATE, DELETE ON public.invitations TO authenticated;\r\n' +
+    'GRANT ALL ON public.invitations TO service_role;\r\n' +
+    '\r\n' +
+    '-- RLS Policy: Tenant isolation using canonical app_private.current_organisation_id()\r\n' +
+    'CREATE POLICY invitations_tenant_isolation ON public.invitations\r\n' +
+    '    FOR ALL\r\n' +
+    '    USING (\r\n' +
+    '        organisation_id = app_private.current_organisation_id()\r\n' +
+    '    )\r\n' +
+    '    WITH CHECK (\r\n' +
+    '        organisation_id = app_private.current_organisation_id()\r\n' +
+    '    );\r\n' +
+    '\r\n' +
+    '-- Stored procedure to atomically accept an invitation on sign-in\r\n' +
+    'CREATE OR REPLACE FUNCTION public.accept_staff_invitation(\r\n' +
+    '    p_invitation_id UUID,\r\n' +
+    '    p_person_id UUID,\r\n' +
+    '    p_verified_email TEXT\r\n' +
+    ')\r\n' +
+    'RETURNS JSONB\r\n' +
+    'LANGUAGE plpgsql\r\n' +
+    'SECURITY DEFINER\r\n' +
+    'SET search_path = public, platform, auth, extensions\r\n' +
+    'AS $$\r\n' +
+    'DECLARE\r\n' +
+    '    v_inv RECORD;\r\n' +
+    '    v_membership_id UUID;\r\n' +
+    '    v_book_id UUID;\r\n' +
+    'BEGIN\r\n' +
+    '    -- 1. Lock and validate invitation\r\n' +
+    '    SELECT * INTO v_inv\r\n' +
+    '    FROM public.invitations\r\n' +
+    '    WHERE id = p_invitation_id\r\n' +
+    "      AND status = 'pending'\r\n" +
+    '      AND expires_at > now()\r\n' +
+    '      AND lower(trim(email)) = lower(trim(p_verified_email))\r\n' +
+    '    FOR UPDATE;\r\n' +
+    '\r\n' +
+    '    IF NOT FOUND THEN\r\n' +
+    "        RETURN jsonb_build_object('ok', false, 'error', 'invitation_invalid_or_expired');\r\n" +
+    '    END IF;\r\n' +
+    '\r\n' +
+    '    -- 2. Upsert membership in the organization\r\n' +
+    '    INSERT INTO public.memberships (\r\n' +
+    '        organisation_id,\r\n' +
+    '        person_id,\r\n' +
+    '        role,\r\n' +
+    '        status,\r\n' +
+    '        created_at,\r\n' +
+    '        updated_at\r\n' +
+    '    ) VALUES (\r\n' +
+    '        v_inv.organisation_id,\r\n' +
+    '        p_person_id,\r\n' +
+    '        v_inv.role_id,\r\n' +
+    "        'active',\r\n" +
+    '        now(),\r\n' +
+    '        now()\r\n' +
+    '    )\r\n' +
+    '    ON CONFLICT (organisation_id, person_id) DO UPDATE\r\n' +
+    '    SET role = EXCLUDED.role,\r\n' +
+    "        status = 'active',\r\n" +
+    '        updated_at = now()\r\n' +
+    '    RETURNING id INTO v_membership_id;\r\n' +
+    '\r\n' +
+    '    -- 3. Upsert membership seat\r\n' +
+    '    INSERT INTO public.membership_seats (\r\n' +
+    '        membership_id,\r\n' +
+    '        seat_code,\r\n' +
+    '        created_at\r\n' +
+    '    ) VALUES (\r\n' +
+    '        v_membership_id,\r\n' +
+    '        v_inv.role_id,\r\n' +
+    '        now()\r\n' +
+    '    )\r\n' +
+    '    ON CONFLICT (membership_id, seat_code) DO NOTHING;\r\n' +
+    '\r\n' +
+    '    -- 4. Attach book memberships if book_ids specified, otherwise attach default book\r\n' +
+    '    IF array_length(v_inv.book_ids, 1) > 0 THEN\r\n' +
+    '        FOREACH v_book_id IN ARRAY v_inv.book_ids LOOP\r\n' +
+    '            INSERT INTO public.book_memberships (\r\n' +
+    '                organisation_id,\r\n' +
+    '                membership_id,\r\n' +
+    '                book_id,\r\n' +
+    '                created_at\r\n' +
+    '            ) VALUES (\r\n' +
+    '                v_inv.organisation_id,\r\n' +
+    '                v_membership_id,\r\n' +
+    '                v_book_id,\r\n' +
+    '                now()\r\n' +
+    '            )\r\n' +
+    '            ON CONFLICT (organisation_id, membership_id, book_id) DO NOTHING;\r\n' +
+    '        END LOOP;\r\n' +
+    '    ELSE\r\n' +
+    '        -- Attach default book\r\n' +
+    '        SELECT id INTO v_book_id\r\n' +
+    '        FROM public.books\r\n' +
+    '        WHERE organisation_id = v_inv.organisation_id\r\n' +
+    '          AND is_default = true\r\n' +
+    '        LIMIT 1;\r\n' +
+    '\r\n' +
+    '        IF v_book_id IS NOT NULL THEN\r\n' +
+    '            INSERT INTO public.book_memberships (\r\n' +
+    '                organisation_id,\r\n' +
+    '                membership_id,\r\n' +
+    '                book_id,\r\n' +
+    '                created_at\r\n' +
+    '            ) VALUES (\r\n' +
+    '                v_inv.organisation_id,\r\n' +
+    '                v_membership_id,\r\n' +
+    '                v_book_id,\r\n' +
+    '                now()\r\n' +
+    '            )\r\n' +
+    '            ON CONFLICT (organisation_id, membership_id, book_id) DO NOTHING;\r\n' +
+    '        END IF;\r\n' +
+    '    END IF;\r\n' +
+    '\r\n' +
+    '    -- 5. Mark invitation as accepted\r\n' +
+    '    UPDATE public.invitations\r\n' +
+    "    SET status = 'accepted',\r\n" +
+    '        accepted_at = now(),\r\n' +
+    '        accepted_by = p_person_id,\r\n' +
+    '        updated_at = now()\r\n' +
+    '    WHERE id = v_inv.id;\r\n' +
+    '\r\n' +
+    '    -- 6. Record immutable audit event\r\n' +
+    '    INSERT INTO public.audit_events (\r\n' +
+    '        organisation_id,\r\n' +
+    '        person_id,\r\n' +
+    '        event_type,\r\n' +
+    '        details,\r\n' +
+    '        occurred_at\r\n' +
+    '    ) VALUES (\r\n' +
+    '        v_inv.organisation_id,\r\n' +
+    '        p_person_id,\r\n' +
+    "        'invitation.accepted',\r\n" +
+    '        jsonb_build_object(\r\n' +
+    "            'invitation_id', v_inv.id,\r\n" +
+    "            'email', v_inv.email,\r\n" +
+    "            'role', v_inv.role_id,\r\n" +
+    "            'membership_id', v_membership_id\r\n" +
+    '        ),\r\n' +
+    '        now()\r\n' +
+    '    );\r\n' +
+    '\r\n' +
+    '    RETURN jsonb_build_object(\r\n' +
+    "        'ok', true,\r\n" +
+    "        'organisation_id', v_inv.organisation_id,\r\n" +
+    "        'membership_id', v_membership_id,\r\n" +
+    "        'role', v_inv.role_id\r\n" +
+    '    );\r\n' +
+    'END;\r\n' +
+    '$$;\r\n' +
+    '\r\n' +
+    'commit;\r\n'
+  
+      at TestContext.<anonymous> (file:///D:/!starq/worktrees/serp-300-codex/tests/serp_300_security_boundaries.test.mjs:31:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:831:18)
+      at Test.postRun (node:internal/test_runner/test:1330:19)
+      at Test.run (node:internal/test_runner/test:1258:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: "-- -----------------------------------------------------------------------------\r\n-- Migration 0027: Staff Invitations and Lifecycle Workflow (SERP-286)\r\n-- -----------------------------------------------------------------------------\r\n-- Enables self-service tenant staff invitations:\r\n-- 1. Table public.invitations with 7-day token expiration, role, books, locations.\r\n-- 2. Tenant isolation RLS policies on public.invitations.\r\n-- 3. Stored procedure public.accept_staff_invitation to atomically activate membership.\r\n-- -----------------------------------------------------------------------------\r\n\r\nbegin;\r\n\r\nCREATE TABLE IF NOT EXISTS public.invitations (\r\n    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\r\n    organisation_id UUID NOT NULL REFERENCES public.organisations(id) ON DELETE CASCADE,\r\n    email TEXT NOT NULL,\r\n    name TEXT NOT NULL,\r\n    role_id TEXT NOT NULL DEFAULT 'viewer',\r\n    job_title TEXT,\r\n    phone TEXT,\r\n    book_ids UUID[] DEFAULT '{}',\r\n    location_ids UUID[] DEFAULT '{}',\r\n    token TEXT NOT NULL UNIQUE DEFAULT replace(gen_random_uuid()::text, '-', '') || replace(gen_random_uuid()::text, '-', ''),\r\n    status TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'accepted', 'expired', 'revoked', 'cancelled')),\r\n    invited_by UUID REFERENCES public.persons(id) ON DELETE SET NULL,\r\n    expires_at TIMESTAMPTZ NOT NULL DEFAULT (now() + interval '7 days'),\r\n    accepted_at TIMESTAMPTZ,\r\n    accepted_by UUID REFERENCES public.persons(id) ON DELETE SET NULL,\r\n    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),\r\n    updated_at TIMESTAMPTZ NOT NULL DEFAULT now()\r\n);\r\n\r\n-- Partial index ensuring only one active pending invitation per email per organization\r\nCREATE UNIQUE INDEX IF NOT EXISTS uq_invitation_org_email_pending\r\n    ON public.invitations (organisation_id, lower(trim(email)))\r\n    WHERE status = 'pending';\r\n\r\n-- Enable RLS\r\nALTER TABLE public.invitations ENABLE ROW LEVEL SECURITY;\r\n\r\n-- Grant permissions\r\nGRANT SELECT, INSERT, UPDATE, DELETE ON public.invitations TO authenticated;\r\nGRANT ALL ON public.invitations TO service_role;\r\n\r\n-- RLS Policy: Tenant isolation using canonical app_private.current_organisation_id()\r\nCREATE POLICY invitations_tenant_isolation ON public.invitations\r\n    FOR ALL\r\n    USING (\r\n        organisation_id = app_private.current_organisation_id()\r\n    )\r\n    WITH CHECK (\r\n        organisation_id = app_private.current_organisation_id()\r\n    );\r\n\r\n-- Stored procedure to atomically accept an invitation on sign-in\r\nCREATE OR REPLACE FUNCTION public.accept_staff_invitation(\r\n    p_invitation_id UUID,\r\n    p_person_id UUID,\r\n    p_verified_email TEXT\r\n)\r\nRETURNS JSONB\r\nLANGUAGE plpgsql\r\nSECURITY DEFINER\r\nSET search_path = public, platform, auth, extensions\r\nAS $$\r\nDECLARE\r\n    v_inv RECORD;\r\n    v_membership_id UUID;\r\n    v_book_id UUID;\r\nBEGIN\r\n    -- 1. Lock and validate invitation\r\n    SELECT * INTO v_inv\r\n    FROM public.invitations\r\n    WHERE id = p_invitation_id\r\n      AND status = 'pending'\r\n      AND expires_at > now()\r\n      AND lower(trim(email)) = lower(trim(p_verified_email))\r\n    FOR UPDATE;\r\n\r\n    IF NOT FOUND THEN\r\n        RETURN jsonb_build_object('ok', false, 'error', 'invitation_invalid_or_expired');\r\n    END IF;\r\n\r\n    -- 2. Upsert membership in the organization\r\n    INSERT INTO public.memberships (\r\n        organisation_id,\r\n        person_id,\r\n        role,\r\n        status,\r\n        created_at,\r\n        updated_at\r\n    ) VALUES (\r\n        v_inv.organisation_id,\r\n        p_person_id,\r\n        v_inv.role_id,\r\n        'active',\r\n        now(),\r\n        now()\r\n    )\r\n    ON CONFLICT (organisation_id, person_id) DO UPDATE\r\n    SET role = EXCLUDED.role,\r\n        status = 'active',\r\n        updated_at = now()\r\n    RETURNING id INTO v_membership_id;\r\n\r\n    -- 3. Upsert membership seat\r\n    INSERT INTO public.membership_seats (\r\n        membership_id,\r\n        seat_code,\r\n        created_at\r\n    ) VALUES (\r\n        v_membership_id,\r\n        v_inv.role_id,\r\n        now()\r\n    )\r\n    ON CONFLICT (membership_id, seat_code) DO NOTHING;\r\n\r\n    -- 4. Attach book memberships if book_ids specified, otherwise attach default book\r\n    IF array_length(v_inv.book_ids, 1) > 0 THEN\r\n        FOREACH v_book_id IN ARRAY v_inv.book_ids LOOP\r\n            INSERT INTO public.book_memberships (\r\n                organisation_id,\r\n                membership_id,\r\n                book_id,\r\n                created_at\r\n            ) VALUES (\r\n                v_inv.organisation_id,\r\n                v_membership_id,\r\n                v_book_id,\r\n                now()\r\n            )\r\n            ON CONFLICT (organisation_id, membership_id, book_id) DO NOTHING;\r\n        END LOOP;\r\n    ELSE\r\n        -- Attach default book\r\n        SELECT id INTO v_book_id\r\n        FROM public.books\r\n        WHERE organisation_id = v_inv.organisation_id\r\n          AND is_default = true\r\n        LIMIT 1;\r\n\r\n        IF v_book_id IS NOT NULL THEN\r\n            INSERT INTO public.book_memberships (\r\n                organisation_id,\r\n                membership_id,\r\n                book_id,\r\n                created_at\r\n            ) VALUES (\r\n                v_inv.organisation_id,\r\n                v_membership_id,\r\n                v_book_id,\r\n                now()\r\n            )\r\n            ON CONFLICT (organisation_id, membership_id, book_id) DO NOTHING;\r\n        END IF;\r\n    END IF;\r\n\r\n    -- 5. Mark invitation as accepted\r\n    UPDATE public.invitations\r\n    SET status = 'accepted',\r\n        accepted_at = now(),\r\n        accepted_by = p_person_id,\r\n        updated_at = now()\r\n    WHERE id = v_inv.id;\r\n\r\n    -- 6. Record immutable audit event\r\n    INSERT INTO public.audit_events (\r\n        organisation_id,\r\n        person_id,\r\n        event_type,\r\n        details,\r\n        occurred_at\r\n    ) VALUES (\r\n        v_inv.organisation_id,\r\n        p_person_id,\r\n        'invitation.accepted',\r\n        jsonb_build_object(\r\n            'invitation_id', v_inv.id,\r\n            'email', v_inv.email,\r\n            'role', v_inv.role_id,\r\n            'membership_id', v_membership_id\r\n        ),\r\n        now()\r\n    );\r\n\r\n    RETURN jsonb_build_object(\r\n        'ok', true,\r\n        'organisation_id', v_inv.organisation_id,\r\n        'membership_id', v_membership_id,\r\n        'role', v_inv.role_id\r\n    );\r\nEND;\r\n$$;\r\n\r\ncommit;\r\n",
+    expected: /\bmemberships\s*\([^)]*\brole\b/is,
+    operator: 'doesNotMatch',
+    diff: 'simple'
+  }
+
+test at ..\..\..\!starq\worktrees\serp-300-codex\tests\serp_300_security_boundaries.test.mjs:39:1
+✖ SERP-300: tenant invitation API is explicitly limited to administrative seats (0.2737ms)
+  AssertionError [ERR_ASSERTION]: the invitation route block must reject non-administrative sessions before reads or writes
+      at TestContext.<anonymous> (file:///D:/!starq/worktrees/serp-300-codex/tests/serp_300_security_boundaries.test.mjs:45:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:831:18)
+      at Test.postRun (node:internal/test_runner/test:1330:19)
+      at Test.run (node:internal/test_runner/test:1258:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: '// Staff Invitation & Authorization Lifecycle Routes (SERP-286)\r\n    // =========================================================================\r\n    if (req.method === "GET" && path === "/api/tenant/invitations") {\r\n      const { data, error } = await db.from("invitations")\r\n        .select("*, persons:invited_by(display_label)")\r\n        .eq("organisation_id", session.organisation_id)\r\n        .order("created_at", { ascending: false });\r\n      if (error) throw new Error("invitations_query_failed");\r\n      return json(200, { ok: true, invitations: data ?? [] }, origin);\r\n    }\r\n\r\n    if (req.method === "POST" && path === "/api/tenant/invitations") {\r\n      const body = await readJson(req);\r\n      if (!csrfValid(req, body, session)) return json(400, { ok: false, error: "csrf_mismatch" }, origin);\r\n\r\n      const email = String(body.email ?? "").trim().toLowerCase();\r\n      const name = String(body.name ?? "").trim();\r\n      const roleId = String(body.role_id ?? "viewer").trim();\r\n      const jobTitle = body.job_title ? String(body.job_title).trim() : null;\r\n      const phone = body.phone ? String(body.phone).trim() : null;\r\n      const bookIds = Array.isArray(body.book_ids) ? body.book_ids : [];\r\n      const locationIds = Array.isArray(body.location_ids) ? body.location_ids : [];\r\n\r\n      if (!email || !name) return json(400, { ok: false, error: "email_and_name_required" }, origin);\r\n\r\n      // Duplicate check in pending invitations\r\n      const existingInvite = await db.from("invitations").select("id")\r\n        .eq("organisation_id", session.organisation_id)\r\n        .ilike("email", email)\r\n        .eq("status", "pending")\r\n        .maybeSingle();\r\n\r\n      if (existingInvite.data) return json(400, { ok: false, error: "invitation_already_pending" }, origin);\r\n\r\n      const { data: invData, error: invError } = await db.from("invitations").insert({\r\n        organisation_id: session.organisation_id,\r\n        email,\r\n        name,\r\n        role_id: roleId,\r\n        job_title: jobTitle,\r\n        phone,\r\n        book_ids: bookIds,\r\n        location_ids: locationIds,\r\n        invited_by: session.person_uuid,\r\n        status: "pending",\r\n      }).select("*").single();\r\n\r\n      if (invError || !invData) throw new Error("invitation_creation_failed");\r\n      await securityEvent(req, "invitation.created", "accepted", session, { invitation_id: invData.id, email, role: roleId });\r\n      return json(200, { ok: true, invitation: invData }, origin);\r\n    }\r\n\r\n    if (req.method === "POST" && path.match(/^\\/api\\/tenant\\/invitations\\/[^\\/]+\\/resend$/)) {\r\n      const body = await readJson(req);\r\n      if (!csrfValid(req, body, session)) return json(400, { ok: false, error: "csrf_mismatch" }, origin);\r\n\r\n      const invId = path.split("/")[4];\r\n      const { data: updated, error } = await db.from("invitations")\r\n        .update({\r\n          status: "pending",\r\n          expires_at: new Date(Date.now() + 7 * 86400000).toISOString(),\r\n          updated_at: new Date().toISOString(),\r\n        })\r\n        .eq("id", invId)\r\n        .eq("organisation_id", session.organisation_id)\r\n        .select("*")\r\n        .single();\r\n\r\n      if (error || !updated) return json(404, { ok: false, error: "invitation_not_found" }, origin);\r\n      await securityEvent(req, "invitation.resent", "accepted", session, { invitation_id: invId });\r\n      return json(200, { ok: true, invitation: updated }, origin);\r\n    }\r\n\r\n    if (req.method === "POST" && path.match(/^\\/api\\/tenant\\/invitations\\/[^\\/]+\\/revoke$/)) {\r\n      const body = await readJson(req);\r\n      if (!csrfValid(req, body, session)) return json(400, { ok: false, error: "csrf_mismatch" }, origin);\r\n\r\n      const invId = path.split("/")[4];\r\n      const { error } = await db.from("invitations")\r\n        .update({\r\n          status: "revoked",\r\n          updated_at: new Date().toISOString(),\r\n        })\r\n        .eq("id", invId)\r\n        .eq("organisation_id", session.organisation_id);\r\n\r\n      if (error) return json(404, { ok: false, error: "invitation_not_found" }, origin);\r\n      await securityEvent(req, "invitation.revoked", "accepted", session, { invitation_id: invId });\r\n      return json(200, { ok: true, status: "revoked" }, origin);\r\n    }\r\n\r\n    ',
+    expected: /invitation_admin_required/,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at ..\..\..\!starq\worktrees\serp-300-codex\tests\serp_300_security_boundaries.test.mjs:57:1
+✖ SERP-300: tenant context switching validates both membership and book assignment (0.3029ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /book_memberships/. Input:
+  
+  'if (req.method === "POST" && (path === "/api/auth/context" || path === "/api/auth/switch-context")) {\r\n' +
+    '      const body = await readJson(req);\r\n' +
+    '      if (!csrfValid(req, body, session)) return json(400, { ok: false, error: "csrf_mismatch" }, origin);\r\n' +
+    '      const targetOrgId = String(body.organisation_id ?? session.organisation_id);\r\n' +
+    '      const targetBookId = body.book_id ? String(body.book_id) : session.book_id;\r\n' +
+    '\r\n' +
+    '      const orgCheck = await db.from("organisations").select("id, slug, legal_name").eq("id", targetOrgId).eq("status", "active").maybeSingle();\r\n' +
+    '      if (!orgCheck.data) return json(403, { ok: false, error: "organisation_access_denied" }, origin);\r\n' +
+    '\r\n' +
+    '      const updated: Session = {\r\n' +
+    '        ...session,\r\n' +
+    '        organisation_id: targetOrgId,\r\n' +
+    '        book_id: targetBookId,\r\n' +
+    '        csrf: crypto.randomUUID(),\r\n' +
+    '        exp: Math.floor(Date.now() / 1000) + SESSION_SECONDS,\r\n' +
+    '      };\r\n' +
+    '      await securityEvent(req, "auth.switch_context", "accepted", updated, { target_org: targetOrgId, target_book: targetBookId });\r\n' +
+    '      return json(200, { ok: true, user: userDto(updated) }, origin, { "set-cookie": cookie(await signSession(updated)) });\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    // =========================================================================\r\n' +
+    '    '
+  
+      at TestContext.<anonymous> (file:///D:/!starq/worktrees/serp-300-codex/tests/serp_300_security_boundaries.test.mjs:63:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:831:18)
+      at Test.postRun (node:internal/test_runner/test:1330:19)
+      at Test.run (node:internal/test_runner/test:1258:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'if (req.method === "POST" && (path === "/api/auth/context" || path === "/api/auth/switch-context")) {\r\n      const body = await readJson(req);\r\n      if (!csrfValid(req, body, session)) return json(400, { ok: false, error: "csrf_mismatch" }, origin);\r\n      const targetOrgId = String(body.organisation_id ?? session.organisation_id);\r\n      const targetBookId = body.book_id ? String(body.book_id) : session.book_id;\r\n\r\n      const orgCheck = await db.from("organisations").select("id, slug, legal_name").eq("id", targetOrgId).eq("status", "active").maybeSingle();\r\n      if (!orgCheck.data) return json(403, { ok: false, error: "organisation_access_denied" }, origin);\r\n\r\n      const updated: Session = {\r\n        ...session,\r\n        organisation_id: targetOrgId,\r\n        book_id: targetBookId,\r\n        csrf: crypto.randomUUID(),\r\n        exp: Math.floor(Date.now() / 1000) + SESSION_SECONDS,\r\n      };\r\n      await securityEvent(req, "auth.switch_context", "accepted", updated, { target_org: targetOrgId, target_book: targetBookId });\r\n      return json(200, { ok: true, user: userDto(updated) }, origin, { "set-cookie": cookie(await signSession(updated)) });\r\n    }\r\n\r\n    // =========================================================================\r\n    ',
+    expected: /book_memberships/,
+    operator: 'match',
+    diff: 'simple'
+  }

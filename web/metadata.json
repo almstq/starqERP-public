@@ -1,0 +1,8 @@
+{
+  "name": "starqERP — Maldives Multi-Tenant SME ERP",
+  "description": "A multi-tenant SaaS ERP engineered for Maldivian SMEs across automotive workshops, boatyards, clinics, and trading. Features organization setup onboarding, zero-trust RBAC roles and user approvals, tenant-configurable workflows, MIRA GST compliance, and activity audit trails.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,16 @@
+✔ SERP-300: invitation SECURITY DEFINER RPC is service-role only (3.0726ms)
+✔ SERP-300: provisioning SECURITY DEFINER RPC is service-role only (1.3181ms)
+✔ SERP-300: invitation migration targets the canonical membership and audit schema (0.6163ms)
+✔ SERP-300: provisioning RPC targets the canonical organisation and workflow schema (0.53ms)
+✔ SERP-300: tenant invitation API is explicitly limited to administrative seats (0.4776ms)
+✔ SERP-300: tenant context switching validates both membership and book assignment (0.1588ms)
+✔ SERP-300: database seat revocation cannot become managing-director authority by fallback (0.2768ms)
+✔ SERP-300: book-scoped API reads apply the active book filter (0.5749ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 143.9008

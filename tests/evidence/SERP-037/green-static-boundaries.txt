@@ -1,0 +1,12 @@
+✔ SERP-037: catalogue writes are function-only for service_role (1.8991ms)
+✔ SERP-037: privileged RPCs are service-role-only SECURITY DEFINER boundaries (1.0119ms)
+✔ SERP-037: encrypted artifact key is memory-only and zeroed (1.2905ms)
+✔ SERP-037: destructive database scope is fixed to synthetic local names (0.3267ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 132.0019

@@ -1,0 +1,322 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+@import "./theme.css";
+
+@layer base {
+  html,
+  body {
+    background-color: var(--md-sys-color-surface);
+    color: var(--md-sys-color-on-surface);
+    font-family: var(--font-sans);
+    letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    width: 100%;
+    min-height: 100dvh;
+    margin: 0;
+    padding: 0;
+    overflow-x: clip;
+  }
+
+  /* Quantum Ambient Lighting (Dark Mode) */
+  html.dark body,
+  .dark body {
+    background: 
+      radial-gradient(circle at 12% 10%, rgba(56, 189, 248, 0.05) 0%, transparent 45%),
+      radial-gradient(circle at 88% 85%, rgba(37, 99, 235, 0.05) 0%, transparent 45%),
+      var(--md-sys-color-surface);
+    background-attachment: fixed;
+  }
+
+  * {
+    box-sizing: border-box;
+    min-width: 0;
+  }
+
+  /* Defensive content wrapping: never break words mid-character unless strictly necessary */
+  h1, h2, h3, h4, h5, h6, p, a, button, input, select, textarea {
+    overflow-wrap: break-word;
+  }
+}
+
+/* Container Query Wrappers (SERP Adaptive Engine) */
+.cq-card {
+  container-type: inline-size;
+  container-name: card;
+  width: 100%;
+  min-width: 0;
+}
+
+.cq-panel {
+  container-type: inline-size;
+  container-name: panel;
+  width: 100%;
+  min-width: 0;
+}
+
+/* Fluid scrollable container for wide regional data like tables & kanban boards */
+.erp-scroll-region {
+  width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+
+/* Custom low-contrast scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--md-sys-color-surface-container-lowest);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--md-sys-color-outline-variant);
+  border-radius: var(--md-sys-shape-corner-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--md-sys-color-outline);
+}
+
+.mono-num {
+  font-family: var(--font-mono);
+  font-feature-settings: "tnum" 1, "zero" 1;
+}
+
+/* ── Finance legacy-surface light-mode compatibility ────────────────────────
+   Older accounting and statutory-report panels predate the shared token layer
+   and explicitly use midnight Tailwind colors. Keep their dark presentation
+   intact, but translate those local utilities to the daylight token system so
+   light mode never renders white-on-pale text or dark-only data tables. */
+html.light .finance-light-compat .bg-\[\#0a0f1d\],
+html.light .finance-light-compat .bg-slate-950 {
+  background-color: var(--md-sys-color-surface-container-lowest);
+}
+
+html.light .finance-light-compat .bg-slate-900,
+html.light .finance-light-compat .bg-slate-900\/60,
+html.light .finance-light-compat .bg-slate-900\/80,
+html.light .finance-light-compat .bg-slate-800 {
+  background-color: var(--md-sys-color-surface-container-high);
+}
+
+html.light .finance-light-compat .bg-emerald-950\/20 {
+  background-color: #ecfdf5;
+}
+
+html.light .finance-light-compat .bg-amber-950\/20 {
+  background-color: #fffbeb;
+}
+
+html.light .finance-light-compat .bg-purple-950\/20 {
+  background-color: #f3e8ff;
+}
+
+html.light .finance-light-compat .bg-rose-950\/30 {
+  background-color: #fff1f2;
+}
+
+html.light .finance-light-compat .border-slate-800,
+html.light .finance-light-compat .border-slate-800\/80,
+html.light .finance-light-compat .border-slate-800\/60,
+html.light .finance-light-compat .border-slate-700 {
+  border-color: var(--md-sys-color-outline-variant);
+}
+
+html.light .finance-light-compat .divide-slate-800\/60 > :not([hidden]) ~ :not([hidden]),
+html.light .finance-light-compat .divide-slate-800\/50 > :not([hidden]) ~ :not([hidden]),
+html.light .finance-light-compat .divide-slate-800\/40 > :not([hidden]) ~ :not([hidden]) {
+  border-color: var(--md-sys-color-outline-variant);
+}
+
+html.light .finance-light-compat .text-white,
+html.light .finance-light-compat .text-slate-200,
+html.light .finance-light-compat .text-slate-300 {
+  color: var(--md-sys-color-on-surface);
+}
+
+html.light .finance-light-compat .text-slate-400 {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+html.light .finance-light-compat .text-slate-500 {
+  color: var(--text-muted);
+}
+
+html.light .finance-light-compat .text-sky-300,
+html.light .finance-light-compat .text-sky-400 {
+  color: #0369a1;
+}
+
+html.light .finance-light-compat .text-emerald-300,
+html.light .finance-light-compat .text-emerald-400 {
+  color: #047857;
+}
+
+html.light .finance-light-compat .text-amber-300,
+html.light .finance-light-compat .text-amber-400 {
+  color: #b45309;
+}
+
+html.light .finance-light-compat .text-purple-300,
+html.light .finance-light-compat .text-purple-400 {
+  color: #7e22ce;
+}
+
+html.light .finance-light-compat .text-rose-300,
+html.light .finance-light-compat .text-rose-400 {
+  color: #be123c;
+}
+
+/* ── M3 Quantum Card Elevation with Specular Glare ─────────────────────────── */
+.dark [style*="var(--md-sys-color-surface-container)"],
+.dark [style*="var(--md-sys-color-surface-container-low)"],
+.dark [style*="var(--md-sys-color-surface-container-lowest)"] {
+  transition: border-color 0.25s var(--md-sys-motion-easing-emphasized),
+              box-shadow 0.25s var(--md-sys-motion-easing-emphasized),
+              transform 0.25s var(--md-sys-motion-easing-emphasized);
+}
+
+.dark [style*="var(--md-sys-color-surface-container)"]:hover,
+.dark [style*="var(--md-sys-color-surface-container-low)"]:hover {
+  border-color: rgba(56, 189, 248, 0.28) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(56, 189, 248, 0.08);
+}
+
+.dark nav a[aria-current="page"],
+.dark nav a.active {
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.18);
+}
+
+/* ── Accessibility Baseline (SERP-035) ─────────────────────────────────────── */
+*:focus-visible {
+  outline: 2px solid var(--md-sys-color-primary);
+  outline-offset: 2px;
+}
+
+button,
+a,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+select {
+  touch-action: manipulation;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.skip-link {
+  position: absolute;
+  top: -9999px;
+  left: 1rem;
+  z-index: 9999;
+  padding: 0.5rem 1rem;
+  background-color: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface);
+  border: 1px solid var(--md-sys-color-primary);
+  border-radius: var(--md-sys-shape-corner-small);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* ── STARQ EXECUTIVE DOCUMENT & PRINT OUTPUT STANDARDS ────────────────────── */
+@page {
+  size: A4 portrait;
+  margin: 15mm 15mm 20mm 15mm;
+}
+
+@media print {
+  aside,
+  header,
+  nav,
+  .skip-link,
+  button:not(.print-preserve),
+  [role="navigation"],
+  [aria-label="Mobile Bottom Navigation"],
+  #starq-copilot-trigger,
+  .fixed,
+  .sticky,
+  .print\:hidden,
+  .starq-theme-widget {
+    display: none !important;
+  }
+
+  body,
+  html,
+  #root,
+  main {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    overflow: visible !important;
+    font-size: 11pt !important;
+  }
+
+  /* Prevent awkward page cuts */
+  .statement-section,
+  .print-avoid-break,
+  .cq-card,
+  table,
+  tr,
+  tbody {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .print-page-break {
+    page-break-after: always !important;
+    break-after: page !important;
+  }
+
+  /* Clean Executive Document Borders */
+  .print-doc-table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+  .print-doc-table th {
+    border-bottom: 2px solid #000000 !important;
+    color: #000000 !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    font-size: 9pt !important;
+    padding: 6pt 4pt !important;
+  }
+  .print-doc-table td {
+    border-bottom: 1px solid #e2e8f0 !important;
+    color: #0f172a !important;
+    padding: 5pt 4pt !important;
+    font-size: 9.5pt !important;
+  }
+  .print-doc-table tfoot td {
+    border-top: 2px solid #000000 !important;
+    border-bottom: 4px double #000000 !important;
+    font-weight: 800 !important;
+    color: #000000 !important;
+    padding: 6pt 4pt !important;
+  }
+
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+}

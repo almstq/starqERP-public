@@ -1,0 +1,117 @@
+SERP-286 / migration 0029 — EXECUTION EVIDENCE
+Captured 2026-08-29 by Elder on a disposable Supabase Postgres 17.6.1.155 (container elder-replay).
+Directive: 2026-08-29_DIRECTIVE_Apply-and-Prove-Before-Build.md
+
+=== 1. CLEAN REPLAY: all 30 migrations, in order, on an empty database ===
+RESULT: 30/30 APPLIED CLEAN, including 0021, 0022, 0028, 0029, 0030.
+This proves the six unapplied migrations COMPOSE. It proves nothing about behaviour.
+
+=== 2. EXECUTING accept_staff_invitation FOR THE FIRST TIME ===
+Command: repaired tests/accept_staff_invitation_probe.sql
+BEGIN
+ERROR:  column "updated_at" of relation "memberships" does not exist
+LINE 6:         updated_at
+                ^
+QUERY:  INSERT INTO public.memberships (
+        organisation_id,
+        person_id,
+        status,
+        created_at,
+        updated_at
+    ) VALUES (
+        v_inv.organisation_id,
+        p_person_id,
+        'active',
+        now(),
+        now()
+    )
+    ON CONFLICT (organisation_id, person_id) DO UPDATE
+    SET status = 'active',
+        updated_at = now()
+    RETURNING id
+CONTEXT:  PL/pgSQL function accept_staff_invitation(uuid,uuid,text) line 22 at SQL statement
+SQL statement "select public.accept_staff_invitation(v_invitation, v_person, 'probe@example.test')"
+PL/pgSQL function inline_code_block line 37 at SQL statement
+
+=== 3. WHAT THIS PROVES ===
+Migration 0029 FAILS ON EXECUTION. It was written to fix wrong column names
+inside a plpgsql body, and it contains one: memberships.updated_at does not exist.
+It applied clean because plpgsql bodies are not semantically checked at CREATE.
+id, organisation_id, person_id, status, valid_from, valid_to, created_at, role_id
+
+=== 4. THE COMPARISON THAT MATTERS ===
+
+There are TWO accept_staff_invitation functions. Migration 0029 created an
+OVERLOAD; it did not replace anything.
+
+  A. accept_staff_invitation(uuid, uuid)        <- pre-existing. THE EDGE CALLS THIS ONE.
+     starq-api/index.ts:541 passes p_invitation_id + p_authenticated_person_id.
+
+  B. accept_staff_invitation(uuid, uuid, text)  <- added by migration 0029. NO CALLERS.
+
+VERIFIED BY EXECUTION, A works correctly:
+  {"ok": true, "role_id": "...", "membership_id": "...", "organisation_id": "..."}
+  PASS: membership created, status=active
+  PASS: the invited role IS recorded on the membership
+  PASS: invitation status=accepted, accepted_at set
+  PASS: no seat synthesized from a role invitation
+  It also fails CLOSED when identity is not bound:
+  {"ok": false, "error": "authenticated_identity_not_bound"}
+
+VERIFIED BY EXECUTION, B (migration 0029) is a REGRESSION on four counts:
+
+  1. IT DOES NOT RUN. Inserts memberships.updated_at, which does not exist.
+     Actual columns: id, organisation_id, person_id, status, valid_from,
+     valid_to, created_at, role_id.
+
+  2. IT LOSES THE INVITED ROLE. The membership INSERT never sets role_id, so
+     accepting an invitation would record no role at all.
+
+  3. IDENTITY BINDING IS WEAKER. B matches the invitation against the
+     CALLER-SUPPLIED p_verified_email argument and never reads public.persons to
+     confirm the caller owns that address. A reads the person record and requires
+     external_subject IS NOT NULL AND verified_email IS NOT NULL, then compares
+     the invitation to the person's STORED verified_email. B trusts its caller
+     where A verifies.
+
+  4. IT SYNTHESIZES A SEAT FROM A ROLE INVITATION. B writes membership_seats.
+     A deliberately does not: roles govern visibility, seats govern execution,
+     and seat assignment is meant to stay an explicit admin action. B also
+     compares invitations.role_id (a uuid) against seats.code (text), which can
+     never match, so it always falls through to a default seat.
+
+=== 5. CONCLUSION ===
+
+Migration 0029 is not a fix. It is a regression that would weaken identity
+binding and grant execution privilege from a visibility invitation. The ONLY
+reason it has caused no harm is that it fails on defect 1 before reaching
+defects 2-4, and that it has never been applied to any database.
+
+RECOMMENDATION: DO NOT APPLY 0029. SERP-286 stays open. The behaviour it was
+written to deliver is already delivered correctly by the function the Edge calls.
+
+Prepared by Elder. DEC-072: this is a finding with raw logs, not an acceptance.
+
+=== 6. RESOLUTION — 0029 WITHDRAWN (founder decision, 29 Aug 2026) ===
+
+Chosen over redesign because it is the better answer at scale: ONE canonical
+function, one code path, and no overload whose two signatures disagree on
+whether a role invitation grants a seat. An overloaded RPC with divergent
+security semantics is a trap for every future caller.
+
+No DROP migration was required. Live had 0001-0027 applied 1:1, so the 3-arg
+function was never created on any database. The file is retired to
+_recyclebin/withdrawn-migrations/ (Rule 2), not deleted.
+
+VERIFIED AFTER WITHDRAWAL, on a freshly created database:
+  - 29/29 migrations applied clean in order
+  - exactly ONE accept_staff_invitation function remains (the overload is gone)
+  - probe green, all five assertions:
+      PASS: fails closed for an unbound identity - authenticated_identity_not_bound
+      PASS: accepted - {"ok": true, ...}
+      PASS: membership active and the invited role was recorded
+      PASS: invitation consumed - status=accepted, accepted_at set
+      PASS: no seat synthesized from a role invitation
+
+The probe now targets the function we actually ship, and permanently asserts the
+defect that got 0029 withdrawn: a role invitation must never grant a seat.

@@ -1,0 +1,7 @@
+BEGIN
+CREATE TABLE
+INSERT 0 31
+CREATE TABLE
+INSERT 0 27
+psql:tests/rls_isolation_probe.sql:94: ERROR:  SERP-124 public table catalogue drifted
+CONTEXT:  PL/pgSQL function inline_code_block line 18 at RAISE

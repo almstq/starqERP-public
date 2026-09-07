@@ -1,0 +1,60 @@
+# Supabase project configuration for STARQ ERP.
+#
+# ─────────────────────────────────────────────────────────────────────────────
+# WHY THIS FILE EXISTS — written 22 Aug 2026, immediately after it was needed
+# ─────────────────────────────────────────────────────────────────────────────
+# There was no config.toml in this repository. That meant the Edge Function's
+# gateway settings lived nowhere except in the flags of whoever last typed the
+# deploy command, and were therefore invisible to review, to git, and to the next
+# person.
+#
+# On 22 August the DEC-063 deploy was run as:
+#
+#     supabase functions deploy starq-api --project-ref <ref>
+#
+# without `--no-verify-jwt`, which the previous deploy had used. The platform
+# default is verify_jwt = true, so Supabase's gateway began demanding an
+# Authorization: Bearer token BEFORE any request reached our code. /health
+# returned 401 despite being handled publicly in index.ts, and — the part that
+# actually mattered — the Flutter client sends no Authorization or apikey header
+# at all (see api_client.dart _buildHeaders), so every request from the shop was
+# rejected at the gateway. The garage app was down until it was redeployed with
+# the flag.
+#
+# Nothing in the code changed. A deploy-time flag was forgotten, and there was no
+# artefact anywhere that would have said it was required.
+#
+# So the setting is declared here instead of being remembered. `supabase functions
+# deploy` reads this file, which means the correct behaviour is now the DEFAULT
+# rather than something a human has to append at 7pm.
+#
+# ─────────────────────────────────────────────────────────────────────────────
+# WHAT verify_jwt = false ACTUALLY MEANS HERE — it is not "no authentication"
+# ─────────────────────────────────────────────────────────────────────────────
+# It disables the SUPABASE GATEWAY's JWT check. It does not disable ours. This
+# function does its own authentication and it is stricter than the gateway's:
+#
+#   · Google OIDC tokens verified against a client-ID allowlist, per client kind
+#   · sessions carried in an HMAC-SHA256 signed cookie with timestamp expiry
+#   · every request re-checked against the database via api_session_authority,
+#     so a revoked seat stops working immediately rather than at token expiry
+#   · every command checked against contracts/commands.ts before it reaches the
+#     database
+#   · CORS restricted to an explicit origin allowlist, and anonymous requests
+#     rate-limited
+#
+# The gateway check would add nothing except a shared anon key that ships inside
+# every client anyway — while breaking the two real clients, neither of which
+# sends one. Turning it off is the correct posture for this function, and it is
+# the posture it was already deployed with before 22 August.
+#
+# If a future client DOES start sending an anon key, this can be revisited — but
+# revisit it deliberately, and change api_client.dart in the same commit.
+
+project_id = "wthabguvueewgtabjsdo"
+
+[functions.starq-api]
+# The function authenticates its own callers. See the note above before changing
+# this — flipping it to true takes the garage offline, and does so at the gateway
+# where none of our own error handling or logging will tell you why.
+verify_jwt = false
