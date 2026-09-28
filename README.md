@@ -4,6 +4,30 @@
 > Built on PostgreSQL Row-Level Security, Supabase Edge Functions, React 19, and Material 3 Design.
 
 ---
+> [!IMPORTANT]
+> **StarqERP development is ON HOLD — trajectory corrected 28 September 2026.**
+>
+> On 28 September 2026 the Founder stopped StarqERP development and corrected its completion
+> model. Development was progressing **component-first / schema-first** — completing isolated
+> modules — while an ERP approaching completion must be organised **business-process-first**.
+>
+> The governing model is now: **close complete ERP business processes**, across five canonical
+> chains — **Order-to-Cash, Procure-to-Pay, Inventory-to-GL, Cash-to-Bank, Record-to-Report** —
+> from user intent through operational truth, accounting/subledger consequence, audit,
+> reconciliation and reporting. A green build, a merged module, or a closed ticket is no
+> longer evidence that a business capability is complete.
+>
+> This is **convergence, not rewrite**. All architecture, migrations, tests and shipped
+> capabilities described below remain valid and are retained. The **Canonical Roadmap
+> Snapshot** and **board progress** figures further down are a pre-28-Sep baseline and are
+> retained as history — they do not reflect the corrected trajectory or current task state.
+>
+> **The canonical development doctrine and roadmap are private and live in the `starqERP`
+> repository — they are not duplicated here by design.** Consult those before planning any
+> StarqERP work.
+
+---
+
 
 ## Overview
 
